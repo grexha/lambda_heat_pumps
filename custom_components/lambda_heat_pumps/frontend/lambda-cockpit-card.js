@@ -144,7 +144,7 @@ function L(key, ...args) {
   return args.length ? t.replace(/\{(\d)\}/g, (_, i) => args[i]) : t;
 }
 // The help page: one section per part of the card.
-const LCC_HELP_URL = "https://guidojeuken-6512.github.io/lambda_heat_pumps/Anwender/lambda-cockpit-kacheln/";
+const LCC_HELP_URL = "https://grexha.github.io/lambda_heat_pumps/Anwender/lambda-cockpit-kacheln/";
 
 // Units the card calculates in. A user may switch a sensor's display unit (e.g.
 // W to kW); its state then comes in that unit and is converted back here.

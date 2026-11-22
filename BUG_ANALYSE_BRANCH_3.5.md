@@ -14,14 +14,14 @@
 
 | Issue | Titel | Status | Priorität |
 |---|---|---|---|
-| [#137](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/137) | E-Manager-Sollleistung ≠ 0 ohne PV-Überschuss | Verhalten der Lambda; **GitHub geschlossen** 15.11.2026 mit Kommentar | – |
-| [#153](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/153) | Außentemperatur „unbekannt“ bei 0 °C | **FIXED** in 3.7.0 (GitHub geschlossen) | – |
-| [#152](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/152) | `ambient_temperature` fehlt nach 3.6.1 | Firmware-Sperre `"1-7"`; Rückfrage Firmware und Werte vor dem Update | niedrig–mittel |
-| [#151](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/151) | PV-Modus endet nicht, Psoll springt auf 0 (2.6.0) | Lambda-Verhalten wie #137; 0-Sprünge vermutlich evcc parallel | niedrig |
-| [#143](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/143) | Viele Entitäten ohne Messwert (Puffer) | Feedback zu Screenshot (EU13, V1.0.4-3K) | niedrig–mittel |
-| [#101](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/101) | Solarthermiemodul wird nicht erkannt | Logs fehlen; Timeout-Logik prüfen (F9) | niedrig |
-| [#105](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/105) | E-Manager-Register springt auf 0 | **Geschlossen** (GitHub), Ursache zweiter Modbus-Client (evcc) | – |
-| [#128](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/128) | Heizkurve: Abweichung zum Sollwert (Enhancement) | Abweichung Soll − berechnet im Cockpit sichtbar (3.7.1); Abweichungs-Sensor (F17) offen | niedrig |
+| [#137](https://github.com/grexha/lambda_heat_pumps/issues/137) | E-Manager-Sollleistung ≠ 0 ohne PV-Überschuss | Verhalten der Lambda; **GitHub geschlossen** 15.11.2026 mit Kommentar | – |
+| [#153](https://github.com/grexha/lambda_heat_pumps/issues/153) | Außentemperatur „unbekannt“ bei 0 °C | **FIXED** in 3.7.0 (GitHub geschlossen) | – |
+| [#152](https://github.com/grexha/lambda_heat_pumps/issues/152) | `ambient_temperature` fehlt nach 3.6.1 | Firmware-Sperre `"1-7"`; Rückfrage Firmware und Werte vor dem Update | niedrig–mittel |
+| [#151](https://github.com/grexha/lambda_heat_pumps/issues/151) | PV-Modus endet nicht, Psoll springt auf 0 (2.6.0) | Lambda-Verhalten wie #137; 0-Sprünge vermutlich evcc parallel | niedrig |
+| [#143](https://github.com/grexha/lambda_heat_pumps/issues/143) | Viele Entitäten ohne Messwert (Puffer) | Feedback zu Screenshot (EU13, V1.0.4-3K) | niedrig–mittel |
+| [#101](https://github.com/grexha/lambda_heat_pumps/issues/101) | Solarthermiemodul wird nicht erkannt | Logs fehlen; Timeout-Logik prüfen (F9) | niedrig |
+| [#105](https://github.com/grexha/lambda_heat_pumps/issues/105) | E-Manager-Register springt auf 0 | **Geschlossen** (GitHub), Ursache zweiter Modbus-Client (evcc) | – |
+| [#128](https://github.com/grexha/lambda_heat_pumps/issues/128) | Heizkurve: Abweichung zum Sollwert (Enhancement) | Abweichung Soll − berechnet im Cockpit sichtbar (3.7.1); Abweichungs-Sensor (F17) offen | niedrig |
 
 ---
 
@@ -117,20 +117,20 @@ Neues Dashboard aus 3.7.0. Die Meldungen stammen vom 10. bis 15.11.2026.
 
 | Issue | Titel | Einordnung | Priorität |
 |---|---|---|---|
-| [#160](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/160) | Entitäten-Suche: Eingabe schließt nach jedem Buchstaben | **FIXED** in 3.7.1, Suchfeld bleibt erhalten; GitHub geschlossen 14.11.2026 | mittel |
-| [#162](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/162) | Raumtemperatur an Lambda immer ausgegraut | **Offen**; Raumfühler wird ab 3.7.1 je Heizkreis zugeordnet (kann helfen). Entitätsliste und Optionen vom Melder anfordern | mittel |
-| [#157](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/157) | Nur ein Heizkreis sichtbar (3 vorhanden); PV-Symbol schwer zu sehen | **FIXED** in 3.7.1: bei mehreren Heizkreisen Kachel Heizbetrieb je Heizkreis auf der Hauptseite, Reiter je Heizkreis mit Karte „Lambda Heizkreis“; Reparaturmeldung für bestehende Cockpits. PV-Symbol bleibt so (eigenes Issue, falls gewünscht); GitHub geschlossen 14.11.2026 | mittel |
-| [#156](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/156) | Keine Heizkurvendaten im Dashboard; Wunsch: VL berechnet, Vorlauf-Offset, VL Soll und VL Ist in der Heizkurve | **Teils FIXED** in 3.7.1: Vorlauf-Werte als Zeile unter der Heizkurve. **Bleibt offen:** Werte in die Grafik der Heizkurve (geplant 3.7.2); fehlende Daten nach dem Start (Ursache unklar) | niedrig–mittel |
-| [#163](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/163) | Schaltpunkte: Kopie-Werte, Dauerlauf, Puffer-Status, Warmwasser-Eco, Laufzeit am ersten Tag | **Teils FIXED** in 3.7.1: Punkte 1, 4, 6, 7. Offen: 2, 3, 5; Issue bleibt offen (noch nicht kommentiert) | mittel |
-| [#159](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/159) | Volumenstrom bei den Verdichter-Werten anzeigen | **Offen** (Wunsch); Sensor existiert bereits | niedrig |
-| [#167](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/167) | Kompressorstarts täglich unter „Laufzeiten heute“ | **FIXED** in 3.7.1: Kachel „Kompressorstarts heute“ im oberen Bereich, AT-Werte in die Kopfzeile; GitHub geschlossen 14.11.2026 | niedrig–mittel |
-| [#169](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/169) | PV-Überschuss mit Kodierung „neg“ zeigt bei Netzbezug Überschuss | **Offen** (Bug, neu 15.11.2026); Karte kennt die Kodierung nicht (wie #155). Hängt an „Funktionen live lesen“ | mittel |
-| [#170](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/170) | Brauchwasser: Temperatur oben und unten zeigen | **FIXED** in 3.7.2 (unveröffentlicht): Speicher zeigt oben und unten; GitHub geschlossen 15.11.2026 | niedrig |
-| [#166](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/166) | Prototyp: Karte im Stil des Lambda-Displays (alle Heizkreise) | **Beantwortet und geschlossen** 14.11.2026: keine zweite Karte im Projekt, Verlinkung angeboten | – |
-| [#165](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/165) | Heizkreise über Register 5006 schaltbar machen | **Nicht geplant** (wie #31, #98, #125, #136); GitHub geschlossen 15.11.2026 | – |
-| [#168](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/168) | „Aufnahme“ zeigt 0,00 kW, wenn der Leistungssensor in kW angezeigt wird (BMeyendriesch, EU15L, 3.7.0) | **FIXED** in 3.7.2 (unveröffentlicht): `_n()` rechnet Leistung, Energie und Laufzeit nach der Einheit um, siehe Details; GitHub geschlossen 15.11.2026 | mittel |
+| [#160](https://github.com/grexha/lambda_heat_pumps/issues/160) | Entitäten-Suche: Eingabe schließt nach jedem Buchstaben | **FIXED** in 3.7.1, Suchfeld bleibt erhalten; GitHub geschlossen 14.11.2026 | mittel |
+| [#162](https://github.com/grexha/lambda_heat_pumps/issues/162) | Raumtemperatur an Lambda immer ausgegraut | **Offen**; Raumfühler wird ab 3.7.1 je Heizkreis zugeordnet (kann helfen). Entitätsliste und Optionen vom Melder anfordern | mittel |
+| [#157](https://github.com/grexha/lambda_heat_pumps/issues/157) | Nur ein Heizkreis sichtbar (3 vorhanden); PV-Symbol schwer zu sehen | **FIXED** in 3.7.1: bei mehreren Heizkreisen Kachel Heizbetrieb je Heizkreis auf der Hauptseite, Reiter je Heizkreis mit Karte „Lambda Heizkreis“; Reparaturmeldung für bestehende Cockpits. PV-Symbol bleibt so (eigenes Issue, falls gewünscht); GitHub geschlossen 14.11.2026 | mittel |
+| [#156](https://github.com/grexha/lambda_heat_pumps/issues/156) | Keine Heizkurvendaten im Dashboard; Wunsch: VL berechnet, Vorlauf-Offset, VL Soll und VL Ist in der Heizkurve | **Teils FIXED** in 3.7.1: Vorlauf-Werte als Zeile unter der Heizkurve. **Bleibt offen:** Werte in die Grafik der Heizkurve (geplant 3.7.2); fehlende Daten nach dem Start (Ursache unklar) | niedrig–mittel |
+| [#163](https://github.com/grexha/lambda_heat_pumps/issues/163) | Schaltpunkte: Kopie-Werte, Dauerlauf, Puffer-Status, Warmwasser-Eco, Laufzeit am ersten Tag | **Teils FIXED** in 3.7.1: Punkte 1, 4, 6, 7. Offen: 2, 3, 5; Issue bleibt offen (noch nicht kommentiert) | mittel |
+| [#159](https://github.com/grexha/lambda_heat_pumps/issues/159) | Volumenstrom bei den Verdichter-Werten anzeigen | **Offen** (Wunsch); Sensor existiert bereits | niedrig |
+| [#167](https://github.com/grexha/lambda_heat_pumps/issues/167) | Kompressorstarts täglich unter „Laufzeiten heute“ | **FIXED** in 3.7.1: Kachel „Kompressorstarts heute“ im oberen Bereich, AT-Werte in die Kopfzeile; GitHub geschlossen 14.11.2026 | niedrig–mittel |
+| [#169](https://github.com/grexha/lambda_heat_pumps/issues/169) | PV-Überschuss mit Kodierung „neg“ zeigt bei Netzbezug Überschuss | **Offen** (Bug, neu 15.11.2026); Karte kennt die Kodierung nicht (wie #155). Hängt an „Funktionen live lesen“ | mittel |
+| [#170](https://github.com/grexha/lambda_heat_pumps/issues/170) | Brauchwasser: Temperatur oben und unten zeigen | **FIXED** in 3.7.2 (unveröffentlicht): Speicher zeigt oben und unten; GitHub geschlossen 15.11.2026 | niedrig |
+| [#166](https://github.com/grexha/lambda_heat_pumps/issues/166) | Prototyp: Karte im Stil des Lambda-Displays (alle Heizkreise) | **Beantwortet und geschlossen** 14.11.2026: keine zweite Karte im Projekt, Verlinkung angeboten | – |
+| [#165](https://github.com/grexha/lambda_heat_pumps/issues/165) | Heizkreise über Register 5006 schaltbar machen | **Nicht geplant** (wie #31, #98, #125, #136); GitHub geschlossen 15.11.2026 | – |
+| [#168](https://github.com/grexha/lambda_heat_pumps/issues/168) | „Aufnahme“ zeigt 0,00 kW, wenn der Leistungssensor in kW angezeigt wird (BMeyendriesch, EU15L, 3.7.0) | **FIXED** in 3.7.2 (unveröffentlicht): `_n()` rechnet Leistung, Energie und Laufzeit nach der Einheit um, siehe Details; GitHub geschlossen 15.11.2026 | mittel |
 
-Nicht cockpit-spezifisch, aber neu: [#161](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/161) (evcc und Register 102). Ursache wie bei #105: zwei Quellen schreiben in Register 102. Ein Melder hat es gelöst, indem er die PV-Option der Integration abgeschaltet hat und nur evcc schreiben lässt. Einordnung bei #105.
+Nicht cockpit-spezifisch, aber neu: [#161](https://github.com/grexha/lambda_heat_pumps/issues/161) (evcc und Register 102). Ursache wie bei #105: zwei Quellen schreiben in Register 102. Ein Melder hat es gelöst, indem er die PV-Option der Integration abgeschaltet hat und nur evcc schreiben lässt. Einordnung bei #105.
 
 ### #160: Entitäten-Suche schließt nach jedem Buchstaben
 

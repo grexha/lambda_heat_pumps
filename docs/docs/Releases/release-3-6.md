@@ -8,7 +8,7 @@ title: "Release 3.6"
 
 Version 3.x ist eine von Grund auf neu geschriebene Fassung der Integration. Sie nutzt die überarbeitete Modbus-Anbindung von Home Assistant ([`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection)) und benötigt **Home Assistant 2026.9.0 oder neuer**. **3.6.1 war das erste über HACS verteilte Release nach 2.8.6.** Wer bisher 2.8.x nutzt, springt mit einem Update direkt auf den neuen Stand. Aktuell ist [Release 3.7](release-3-7.md).
 
-Alle Einzeländerungen stehen im [Changelog](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/blob/main/CHANGELOG.md){:target="_blank" rel="noopener noreferrer"}. Diese Seite fasst zusammen, was sich für Anwender ändert.
+Alle Einzeländerungen stehen im [Changelog](https://github.com/grexha/lambda_heat_pumps/blob/main/CHANGELOG.md){:target="_blank" rel="noopener noreferrer"}. Diese Seite fasst zusammen, was sich für Anwender ändert.
 
 ## Was neu ist
 

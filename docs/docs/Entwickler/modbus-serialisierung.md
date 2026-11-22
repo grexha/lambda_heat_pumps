@@ -6,7 +6,7 @@ title: "Modbus-Serialisierung - Technische Dokumentation"
 
 *Zuletzt geändert am 06.09.2026*
 
-**Stand:** Release 3.5.3 (Rewrite auf [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection)/`tmodbus`, Branch `3.5`; Hintergrund zum Rewrite: [Issue #99](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/99))
+**Stand:** Release 3.5.3 (Rewrite auf [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection)/`tmodbus`, Branch `3.5`; Hintergrund zum Rewrite: [Issue #99](https://github.com/grexha/lambda_heat_pumps/issues/99))
 
 Diese Dokumentation beschreibt zwei Modbus-Fehlerklassen, die der Rewrite
 eingeführt hatte: Race Conditions/Transaction-ID-Mismatches bei gleichzeitigen
@@ -77,7 +77,7 @@ Schreib-Timer für PV-Überschuss-/Raumtemperatur-Vorgaben (`services.py`)
 laufen mit unabhängigen Intervallen auf **derselben** `ModbusConnection`. Ohne
 Sperre können beide gleichzeitig ein Modbus-Request/Response auf derselben
 TCP-Verbindung anstoßen — exakt dieselbe Fehlerklasse wie das ursprünglich in
-der Vor-Rewrite-Integration behobene [Issue #105](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/105)
+der Vor-Rewrite-Integration behobene [Issue #105](https://github.com/grexha/lambda_heat_pumps/issues/105)
 (Transaction-ID-Desync: ein Schreibvorgang wird als erfolgreich geloggt, kommt
 am Gerät aber sporadisch nie an).
 

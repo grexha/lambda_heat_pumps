@@ -6,13 +6,13 @@ title: "Register-Reihenfolge für int32-Sensoren"
 
 *Zuletzt geändert am 06.09.2026*
 
-**Stand:** Release 3.5.2 (Rewrite auf [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection)/`tmodbus`, Branch `3.5`; Hintergrund zum Rewrite: [Issue #99](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/99))
+**Stand:** Release 3.5.2 (Rewrite auf [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection)/`tmodbus`, Branch `3.5`; Hintergrund zum Rewrite: [Issue #99](https://github.com/grexha/lambda_heat_pumps/issues/99))
 
 Technische Dokumentation zur konfigurierbaren Register-Reihenfolge
 (Register/Word Order) bei den zwei 32-Bit-Zählern jeder Wärmepumpe
 (`compressor_power_consumption_accumulated`,
 `compressor_thermal_energy_output_accumulated`) und beim Solar-Energiezähler
-(`energy_total`). Hintergrund: [Issue #22](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/22).
+(`energy_total`). Hintergrund: [Issue #22](https://github.com/grexha/lambda_heat_pumps/issues/22).
 
 ## Was sich geändert hat
 

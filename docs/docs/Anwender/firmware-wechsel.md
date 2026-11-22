@@ -87,7 +87,7 @@ Haben Sie unter **Konfigurieren** eine eigene Register-Reihenfolge gewählt, set
 Die Lambda veröffentlicht neue Firmware-Versionen nicht automatisch. Sie werden in die Integration aufgenommen, sobald sie gemeldet werden.
 
 - Wählen Sie vorübergehend die Version aus der Liste, die Ihrer am nächsten liegt (für die neue Steuerung eine V1.0.x-3K, sonst die nächstniedrigere).
-- Melden Sie Ihre Version in einem [GitHub-Issue](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues), am besten mit den Werten der beiden Energiezähler vom Display und aus Home Assistant. Daran lässt sich die Register-Reihenfolge Ihrer Firmware erkennen.
+- Melden Sie Ihre Version in einem [GitHub-Issue](https://github.com/grexha/lambda_heat_pumps/issues), am besten mit den Werten der beiden Energiezähler vom Display und aus Home Assistant. Daran lässt sich die Register-Reihenfolge Ihrer Firmware erkennen.
 
 ## Siehe auch
 

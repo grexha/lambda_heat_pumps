@@ -6,7 +6,7 @@ title: "Migrationssystem"
 
 *Zuletzt geändert am 17.10.2026*
 
-**Stand:** Release 3.5.2 (Rewrite auf [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection)/`tmodbus`, Branch `3.5`; Hintergrund zum Rewrite: [Issue #99](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/99))
+**Stand:** Release 3.5.2 (Rewrite auf [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection)/`tmodbus`, Branch `3.5`; Hintergrund zum Rewrite: [Issue #99](https://github.com/grexha/lambda_heat_pumps/issues/99))
 
 Das versionierte Migrationssystem aus der Vor-Rewrite-Integration
 (`MigrationVersion`-Enum, `migration.py`, `const_migration.py`,

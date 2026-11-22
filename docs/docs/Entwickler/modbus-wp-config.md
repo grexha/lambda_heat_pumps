@@ -6,7 +6,7 @@ title: "lambda_wp_config.yaml (Entwickler)"
 
 *Zuletzt geändert am 06.09.2026*
 
-**Stand:** Release 3.5.2 (Rewrite auf [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection)/`tmodbus`, Branch `3.5`; Hintergrund zum Rewrite: [Issue #99](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/99))
+**Stand:** Release 3.5.2 (Rewrite auf [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection)/`tmodbus`, Branch `3.5`; Hintergrund zum Rewrite: [Issue #99](https://github.com/grexha/lambda_heat_pumps/issues/99))
 
 Die Datei `lambda_wp_config.yaml` (Pfad: `config/lambda_wp_config.yaml`)
 deckt seit 3.5 nur noch die drei Dinge ab, für die Home Assistant selbst

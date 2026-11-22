@@ -23,7 +23,7 @@ Diese Anleitung beschreibt, wie Sie die Lambda Heat Pumps Integration manuell oh
 
 Öffnen Sie das GitHub Repository der Lambda Heat Pumps Integration:
 
-**Repository URL:** [https://github.com/GuidoJeuken-6512/lambda_heat_pumps](https://github.com/GuidoJeuken-6512/lambda_heat_pumps){:target="_blank" rel="noopener noreferrer"}
+**Repository URL:** [https://github.com/grexha/lambda_heat_pumps](https://github.com/grexha/lambda_heat_pumps){:target="_blank" rel="noopener noreferrer"}
 
 ### 2. Branch auswählen
 
@@ -45,7 +45,7 @@ Sie haben mehrere Möglichkeiten, das Repository herunterzuladen:
 #### Option B: Git Clone (für Entwickler)
 
 ```bash
-git clone https://github.com/GuidoJeuken-6512/lambda_heat_pumps.git
+git clone https://github.com/grexha/lambda_heat_pumps.git
 cd lambda_heat_pumps
 git checkout main  # oder den gewünschten Branch
 ```
@@ -125,6 +125,6 @@ Um die Integration zu aktualisieren:
 
 ## Weitere Informationen
 
-- [GitHub Repository](https://github.com/GuidoJeuken-6512/lambda_heat_pumps){:target="_blank" rel="noopener noreferrer"}
-- [Releases](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/releases){:target="_blank" rel="noopener noreferrer"}
+- [GitHub Repository](https://github.com/grexha/lambda_heat_pumps){:target="_blank" rel="noopener noreferrer"}
+- [Releases](https://github.com/grexha/lambda_heat_pumps/releases){:target="_blank" rel="noopener noreferrer"}
 

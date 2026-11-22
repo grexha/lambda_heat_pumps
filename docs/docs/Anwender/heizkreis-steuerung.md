@@ -53,7 +53,7 @@ Der Sensor dient als Vergleichswert. Die Lambda regelt weiterhin mit ihrer eigen
 ## Vorlage: Heizkurven-Card
 
 Eine fertige Dashboard-Karte, die die Heizkurve und die Werte übersichtlich darstellt, finden Sie hier:
-[Lambda Heizkurven Card](https://guidojeuken-6512.github.io/lambda_heat_pumps/Vorlagen/Lambda_heizkurve_card/)
+[Lambda Heizkurven Card](https://grexha.github.io/lambda_heat_pumps/Vorlagen/Lambda_heizkurve_card/)
 
 ## Weitere Informationen
 
