@@ -1143,9 +1143,15 @@ class YesterdayCycleSensor(LambdaEntity, RestoreSensor):
 
     @callback
     def set_value(self, value: float) -> None:
-        """Take over the day that just ended."""
+        """Take over the day that just ended.
+
+        The sensor is disabled by default and then never added to Home
+        Assistant, so it has no hass to write to. The value is kept either way,
+        and restored when the sensor is enabled later.
+        """
         self._value = value
-        self.async_write_ha_state()
+        if self.hass is not None:
+            self.async_write_ha_state()
 
 
 class LambdaCopSensor(LambdaEntity, SensorEntity):

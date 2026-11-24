@@ -253,6 +253,27 @@ async def test_a_day_ends(hass: HomeAssistant, controller: Controller) -> None:
     assert state_of(hass, "eu08l_hp1_hot_water_cycling_total") == "1"
 
 
+async def test_a_day_ends_without_the_yesterday_sensor(
+    hass: HomeAssistant, controller: Controller
+) -> None:
+    """The yesterday sensor is off by default and never added. The day still ends.
+
+    Before the fix, writing to the missing yesterday sensor raised, and the daily
+    counter was never set back to zero.
+    """
+    entry = await setup_entry(hass, controller, legacy=True)
+    await enable_sensors(hass, entry, "eu08l_hp1_hot_water_cycling_daily")
+
+    controller.registers[1003] = 2
+    await _poll(hass, 3)
+    assert state_of(hass, "eu08l_hp1_hot_water_cycling_daily") == "1"
+
+    _rollover(hass, entry.entry_id, PERIOD_DAILY)
+    await hass.async_block_till_done()
+
+    assert state_of(hass, "eu08l_hp1_hot_water_cycling_daily") == "0"
+
+
 async def test_yesterday_survives_a_restart(
     hass: HomeAssistant, controller: Controller
 ) -> None:
