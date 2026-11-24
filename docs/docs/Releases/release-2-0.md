@@ -2,7 +2,7 @@
 
 *Zuletzt geändert am 21.03.2026*
 
-Dokumentation basierend auf dem [GitHub Release V2.0.0](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/releases/tag/V2.0.0).
+Dokumentation basierend auf dem [GitHub Release V2.0.0](https://github.com/grexha/lambda_heat_pumps/releases/tag/V2.0.0).
 
 ---
 
@@ -74,4 +74,4 @@ Dokumentation basierend auf dem [GitHub Release V2.0.0](https://github.com/Guido
 
 ## Referenz
 
-- [GitHub Release V2.0.0](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/releases/tag/V2.0.0)
+- [GitHub Release V2.0.0](https://github.com/grexha/lambda_heat_pumps/releases/tag/V2.0.0)

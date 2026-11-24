@@ -37,7 +37,7 @@ Die beiden Dashboard-Karten (`custom:lambda-cockpit-card`, `custom:lambda-entiti
 
 ## Update von Version 2.x
 
-Beim ersten Start nach dem Update übernimmt die Integration Ihren bestehenden Eintrag automatisch: Entitäts-IDs und Verlauf bleiben erhalten. Vor dem Update ein Backup erstellen. Was danach zu prüfen ist (Firmware-Version, Statistik-Hinweise unter **Reparaturen**, weggefallene Entitäten), steht im Abschnitt „Update von 2.x auf 3.5.x“ des [Changelogs](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/blob/main/CHANGELOG.md){:target="_blank" rel="noopener noreferrer"} und auf der Seite [Firmware-Version ändern](firmware-wechsel.md).
+Beim ersten Start nach dem Update übernimmt die Integration Ihren bestehenden Eintrag automatisch: Entitäts-IDs und Verlauf bleiben erhalten. Vor dem Update ein Backup erstellen. Was danach zu prüfen ist (Firmware-Version, Statistik-Hinweise unter **Reparaturen**, weggefallene Entitäten), steht im Abschnitt „Update von 2.x auf 3.5.x“ des [Changelogs](https://github.com/grexha/lambda_heat_pumps/blob/main/CHANGELOG.md){:target="_blank" rel="noopener noreferrer"} und auf der Seite [Firmware-Version ändern](firmware-wechsel.md).
 
 ## Nächste Schritte
 

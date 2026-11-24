@@ -6,7 +6,7 @@ title: "Energieverbrauchssensoren - Technische Dokumentation"
 
 *Zuletzt geändert am 18.10.2026*
 
-**Stand:** Release 3.5.2 (Rewrite auf [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection)/`tmodbus`, Branch `3.5`; Hintergrund zum Rewrite: [Issue #99](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/99))
+**Stand:** Release 3.5.2 (Rewrite auf [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection)/`tmodbus`, Branch `3.5`; Hintergrund zum Rewrite: [Issue #99](https://github.com/grexha/lambda_heat_pumps/issues/99))
 
 Diese Dokumentation beschreibt die technische Implementierung der Energieverbrauchssensoren (elektrisch und thermisch) in der Lambda Heat Pumps Integration.
 

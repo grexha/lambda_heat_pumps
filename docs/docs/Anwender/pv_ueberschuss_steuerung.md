@@ -53,7 +53,7 @@ An der Lambda muss der E-Manager auf Werte per Modbus eingestellt sein. Eine erf
     In „Automatik“ kann die Lambda zusätzlich die Temperaturen anheben (Handbuch: „PV Betrieb – Temperaturerhöhung“ für Heizkreis, Puffer und Warmwasser). Prüfen Sie diese Einstellungen an der Lambda, bevor Sie „Automatik“ wählen.
 
 !!! warning "Messpunkt passend zum gemeldeten Wert"
-    Die Integration meldet den Wert, den der Quellsensor liefert. Wählen Sie den Messpunkt so, dass er dazu passt: **E-Überschuss**, wenn der Wert nur den Überschuss enthält (ohne den Verbrauch der Wärmepumpe). Enthält der Wert den Verbrauch der Wärmepumpe (z. B. ein Netzzähler hinter der Wärmepumpe), rechnet die Lambda ihren eigenen Verbrauch heraus und sieht unter Umständen einen Überschuss, wo keiner ist ([#137](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/137)).
+    Die Integration meldet den Wert, den der Quellsensor liefert. Wählen Sie den Messpunkt so, dass er dazu passt: **E-Überschuss**, wenn der Wert nur den Überschuss enthält (ohne den Verbrauch der Wärmepumpe). Enthält der Wert den Verbrauch der Wärmepumpe (z. B. ein Netzzähler hinter der Wärmepumpe), rechnet die Lambda ihren eigenen Verbrauch heraus und sieht unter Umständen einen Überschuss, wo keiner ist ([#137](https://github.com/grexha/lambda_heat_pumps/issues/137)).
 
 Danach ist der Überschuss auf der Seite Energie-Management der Lambda sichtbar:
 

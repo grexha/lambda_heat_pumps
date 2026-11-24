@@ -13,7 +13,7 @@ Energiezähler (`compressor_power_consumption_accumulated`). Dieser Artikel
 zeigt, wie man den restlichen Stromverbrauch trotzdem sichtbar machen kann –
 und wo die Grenzen einer Schätzung liegen.
 
-Hintergrund: [Issue #86](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/86).
+Hintergrund: [Issue #86](https://github.com/grexha/lambda_heat_pumps/issues/86).
 
 > ⚠️ **Alle Prozentwerte in diesem Artikel stammen von genau einer
 > Installation und sind nicht übertragbar.** Diese Anlage macht aktuell
@@ -96,7 +96,7 @@ Zwischenzähler und diesem internen Sensor ergibt den Nebenverbrauch.
 
 ## Was ich aus echten Daten gelernt habe – und wie unrepräsentativ sie sind
 
-Für [Issue #86](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/86)
+Für [Issue #86](https://github.com/grexha/lambda_heat_pumps/issues/86)
 habe ich genau diesen Vergleich auf einer Installation nachvollzogen, die
 zufällig einen dedizierten Shelly 3EM vor der Lambda hat. Über die
 Home-Assistant-Statistik-API (`ha_get_statistics`, Aggregation pro Monat)

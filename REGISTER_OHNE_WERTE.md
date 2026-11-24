@@ -32,17 +32,17 @@
 
 | # | Quelle | Modell | Firmware | Steuerung | Betrieb | Rohwerte |
 |---|---|---|---|---|---|---|
-| A | [#100](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/100#issuecomment-5088880938) madmaxx425, 24./27.07.2026 | EU10L Luft-Monoblock | **V1.0.4-3K** | SW V1.3.10 | Standby / Sommer | vollständiger Dump 0–5152 |
-| B | [#100](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/100#issuecomment-6310216535) BMeyendriesch, 21.10.2026 | EU15L Luft/Wasser | **V1.0.2-3K** | SW V1.3.10 | **Heizen, Kompressor läuft**, Display verglichen | vollständiger Dump 0–5007 |
-| C | [#107](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/107#issuecomment-5511732954) PhilippHS, 02.09.2026 | EU10L | V1.0.4-3K („SW“ genannt) | – | – | Register 0–4: `0, 1, 65236, 157, 164` |
-| D | [#108](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/108#issuecomment-5200845821) foerdecoder, 06.08.2026 | EU08L | V1.0.4 (V1.1.0-3K zurückgezogen) | – | – | Register 2 gültig, Außentemperatur wird extern eingespeist |
-| E | [#100](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/100#issuecomment-5068349040) Heimerdinger2000 | EU10L | V1.0.4-3K | SW 1.3.10 | – | `ambient_temperature` = −300, Display zeigt Außentemperatur |
-| F | [#91](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/91) pinkpanther84, 07.06.2026 | EU13L | V0.0.8-3K | – | – | 102 = −32768 W (Display −5,74 kW), 103 = 0 |
-| G | [#67](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/67#issuecomment-3943524391) joachimpfeifer, 23.02.2026 | EU08L | V0.0.8-3K | – | Kompressor lief | 2004/2005: Exception 2 |
-| H | [#70](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/70#issuecomment-4065252701) SynAck91, 16.03.2026 | EU15L | nicht genannt (alte Steuerung, Integration 2.3) | – | – | 1010 und **1025 liefern Werte** |
-| I | [#88](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/88) Zeppelin-PV, 30.05.2026 | EU10L | V0.0.10-3K | – | – | „viele Sensoren −300, manche 32768“, **keine Adressen** |
-| J | [#87](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/87), [#31](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/31), [#136](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/136) | EU08L/EU13L/EU10L | V0.0.9-3K, V1.0.4-3K | – | – | 5005 → −300 nach Timeout; 5006 → −1 nach ~5 min |
-| K | [#39](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/39) | EU13L u. a. | V0.0.9-3K | – | – | 5002–5007 im Block nicht lesbar (in 3.5 durch Einzelabfrage von 5n07 gelöst); 5n02/5n03 liefern Werte |
+| A | [#100](https://github.com/grexha/lambda_heat_pumps/issues/100#issuecomment-5088880938) madmaxx425, 24./27.07.2026 | EU10L Luft-Monoblock | **V1.0.4-3K** | SW V1.3.10 | Standby / Sommer | vollständiger Dump 0–5152 |
+| B | [#100](https://github.com/grexha/lambda_heat_pumps/issues/100#issuecomment-6310216535) BMeyendriesch, 21.10.2026 | EU15L Luft/Wasser | **V1.0.2-3K** | SW V1.3.10 | **Heizen, Kompressor läuft**, Display verglichen | vollständiger Dump 0–5007 |
+| C | [#107](https://github.com/grexha/lambda_heat_pumps/issues/107#issuecomment-5511732954) PhilippHS, 02.09.2026 | EU10L | V1.0.4-3K („SW“ genannt) | – | – | Register 0–4: `0, 1, 65236, 157, 164` |
+| D | [#108](https://github.com/grexha/lambda_heat_pumps/issues/108#issuecomment-5200845821) foerdecoder, 06.08.2026 | EU08L | V1.0.4 (V1.1.0-3K zurückgezogen) | – | – | Register 2 gültig, Außentemperatur wird extern eingespeist |
+| E | [#100](https://github.com/grexha/lambda_heat_pumps/issues/100#issuecomment-5068349040) Heimerdinger2000 | EU10L | V1.0.4-3K | SW 1.3.10 | – | `ambient_temperature` = −300, Display zeigt Außentemperatur |
+| F | [#91](https://github.com/grexha/lambda_heat_pumps/issues/91) pinkpanther84, 07.06.2026 | EU13L | V0.0.8-3K | – | – | 102 = −32768 W (Display −5,74 kW), 103 = 0 |
+| G | [#67](https://github.com/grexha/lambda_heat_pumps/issues/67#issuecomment-3943524391) joachimpfeifer, 23.02.2026 | EU08L | V0.0.8-3K | – | Kompressor lief | 2004/2005: Exception 2 |
+| H | [#70](https://github.com/grexha/lambda_heat_pumps/issues/70#issuecomment-4065252701) SynAck91, 16.03.2026 | EU15L | nicht genannt (alte Steuerung, Integration 2.3) | – | – | 1010 und **1025 liefern Werte** |
+| I | [#88](https://github.com/grexha/lambda_heat_pumps/issues/88) Zeppelin-PV, 30.05.2026 | EU10L | V0.0.10-3K | – | – | „viele Sensoren −300, manche 32768“, **keine Adressen** |
+| J | [#87](https://github.com/grexha/lambda_heat_pumps/issues/87), [#31](https://github.com/grexha/lambda_heat_pumps/issues/31), [#136](https://github.com/grexha/lambda_heat_pumps/issues/136) | EU08L/EU13L/EU10L | V0.0.9-3K, V1.0.4-3K | – | – | 5005 → −300 nach Timeout; 5006 → −1 nach ~5 min |
+| K | [#39](https://github.com/grexha/lambda_heat_pumps/issues/39) | EU13L u. a. | V0.0.9-3K | – | – | 5002–5007 im Block nicht lesbar (in 3.5 durch Einzelabfrage von 5n07 gelöst); 5n02/5n03 liefern Werte |
 
 Weitere Aussagen aus den Issues:
 - Register ab 1024 stehen nicht in der Lambda-Modbus-Doku; sie wurden zusammengesucht (#70).

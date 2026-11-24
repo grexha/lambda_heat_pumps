@@ -1,13 +1,13 @@
 # Lambda Heat Pumps Integration for Home Assistant
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/custom-components/hacs)
-[![Release](https://img.shields.io/github/v/release/GuidoJeuken-6512/lambda_heat_pumps)](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/GuidoJeuken-6512/lambda_heat_pumps/total?label=downloads)](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/releases)
+[![Release](https://img.shields.io/github/v/release/grexha/lambda_heat_pumps)](https://github.com/grexha/lambda_heat_pumps/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/grexha/lambda_heat_pumps/total?label=downloads)](https://github.com/grexha/lambda_heat_pumps/releases)
 ![Usage](https://img.shields.io/badge/dynamic/json?color=9932CC&logo=home-assistant&label=usage&suffix=%20installs&cacheSeconds=15600&url=https://analytics.home-assistant.io/custom_integrations.json&query=$.lambda_heat_pumps.total)
-[![Stars](https://img.shields.io/github/stars/GuidoJeuken-6512/lambda_heat_pumps?style=flat)](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/stargazers)
-[![license](https://img.shields.io/github/license/GuidoJeuken-6512/lambda_heat_pumps.svg)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/grexha/lambda_heat_pumps?style=flat)](https://github.com/grexha/lambda_heat_pumps/stargazers)
+[![license](https://img.shields.io/github/license/grexha/lambda_heat_pumps.svg)](LICENSE)
 
-[![Open your Home Assistant instance and open this repository inside HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=GuidoJeuken-6512&repository=lambda_heat_pumps&category=integration)
+[![Open your Home Assistant instance and open this repository inside HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=grexha&repository=lambda_heat_pumps&category=integration)
 
 
 <a href="https://www.paypal.com/donate/?hosted_button_id=P3N7RRC2SNQ48">
@@ -91,11 +91,11 @@ After initial setup, you can modify additional settings in the integration optio
 - **Register Order Configuration**: Configurable register order for 32-bit values from multiple 16-bit registers
 
 **Documentation:**
-- [WebDocu](https://guidojeuken-6512.github.io/lambda_heat_pumps/)
+- [WebDocu](https://grexha.github.io/lambda_heat_pumps/)
 - 
 -
 **Support:**
-- [GitHub Issues](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues)
+- [GitHub Issues](https://github.com/grexha/lambda_heat_pumps/issues)
 - [Home Assistant Community](https://community.home-assistant.io/)
 
 ---
@@ -436,7 +436,7 @@ The integration linearly interpolates between these points based on the current 
 
 ## 🖥️ Lambda Cockpit (Dashboard)
 
-Ab 3.7.0 liefert die Integration ein fertiges Dashboard mit: Optionen → **Dashboard „Lambda Cockpit“ installieren**, danach Home Assistant über die Reparaturmeldung neu starten. Details: [Lambda Cockpit](https://guidojeuken-6512.github.io/lambda_heat_pumps/Anwender/lambda-cockpit/).
+Ab 3.7.0 liefert die Integration ein fertiges Dashboard mit: Optionen → **Dashboard „Lambda Cockpit“ installieren**, danach Home Assistant über die Reparaturmeldung neu starten. Details: [Lambda Cockpit](https://grexha.github.io/lambda_heat_pumps/Anwender/lambda-cockpit/).
 
 *English:* From 3.7.0 the integration ships a ready-made dashboard: Options → **Install the Lambda Cockpit dashboard**, then restart Home Assistant from the repair it raises.
 
@@ -454,7 +454,7 @@ If you do not use HACS, you can install the integration manually:
    ```bash
    cd /config/custom_components
    - Download the integration from:  
-    https://github.com/GuidoJeuken-6512/lambda_heat_pumps
+    https://github.com/grexha/lambda_heat_pumps
    - Copy the entire folder `lambda_heat_pumps` into `/config/custom_components/` on your Home Assistant server.
 
 4. **Restart Home Assistant** to activate the integration.
@@ -464,10 +464,10 @@ If you do not use HACS, you can install the integration manually:
 ## 🛠️ Troubleshooting & Support
 - **Log-Analyse:** Aktiviere Debug-Logging für detaillierte Fehlerausgabe
 - **Häufige Probleme:** Siehe Abschnitt „Troubleshooting“ unten
-- **Home Assistant im Docker-Container:** Meldet das Log `cannot import name 'create_async_udp_client' from 'tmodbus'`, ist im Container ein zu altes `tmodbus` (vor 0.5) installiert. Ab Version 3.7.0 aktualisiert Home Assistant es beim Start selbst. Sonst im Container `pip install -U "tmodbus>=0.6.1"` ausführen und Home Assistant neu starten. Ein Update des Home-Assistant-Images behebt es ebenfalls ([#149](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/149)).
+- **Home Assistant im Docker-Container:** Meldet das Log `cannot import name 'create_async_udp_client' from 'tmodbus'`, ist im Container ein zu altes `tmodbus` (vor 0.5) installiert. Ab Version 3.7.0 aktualisiert Home Assistant es beim Start selbst. Sonst im Container `pip install -U "tmodbus>=0.6.1"` ausführen und Home Assistant neu starten. Ein Update des Home-Assistant-Images behebt es ebenfalls ([#149](https://github.com/grexha/lambda_heat_pumps/issues/149)).
   *English:* If the log shows `cannot import name 'create_async_udp_client' from 'tmodbus'`, the container has an outdated `tmodbus` (older than 0.5). From 3.7.0 on, Home Assistant upgrades it on startup. Otherwise run `pip install -U "tmodbus>=0.6.1"` inside the container and restart, or update the Home Assistant image.
 - **Support:**
-  - [GitHub Issues](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues)
+  - [GitHub Issues](https://github.com/grexha/lambda_heat_pumps/issues)
   - [Home Assistant Community](https://community.home-assistant.io/)
 
 ---
@@ -478,7 +478,7 @@ MIT License. Nutzung auf eigene Gefahr. Siehe [LICENSE](LICENSE).
 ---
 
 ## 📚 Weitere Dokumentation
-- [Web Dokumentation](https://guidojeuken-6512.github.io/lambda_heat_pumps/)
+- [Web Dokumentation](https://grexha.github.io/lambda_heat_pumps/)
 - [Quick Start (DE)](docs/lambda_heat_pumps_quick_start.md)
 - [FAQ (DE)](docs/lambda_heat_pumps_faq.md)
 - [Entwickler-Guide](docs/lambda_heat_pumps_developer_guide.md)
@@ -489,7 +489,7 @@ MIT License. Nutzung auf eigene Gefahr. Siehe [LICENSE](LICENSE).
 ---
 
 ## 📝 Changelog
-Siehe [Releases](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/releases) für Änderungen und Breaking Changes.
+Siehe [Releases](https://github.com/grexha/lambda_heat_pumps/releases) für Änderungen und Breaking Changes.
 
 ---
 

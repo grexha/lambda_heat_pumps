@@ -6,7 +6,7 @@ title: "Heizkurve"
 
 *Zuletzt geändert am 06.09.2026*
 
-**Stand:** Release 3.5.2 (Rewrite auf [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection)/`tmodbus`, Branch `3.5`; Hintergrund zum Rewrite: [Issue #99](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/99))
+**Stand:** Release 3.5.2 (Rewrite auf [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection)/`tmodbus`, Branch `3.5`; Hintergrund zum Rewrite: [Issue #99](https://github.com/grexha/lambda_heat_pumps/issues/99))
 
 Die Lambda Heat Pumps Integration unterstützt die Konfiguration von Heizkurven für jeden Heizkreis. Die Heizkurve bestimmt die Vorlauftemperatur basierend auf der Außentemperatur und ermöglicht eine energieeffiziente und komfortable Heizungssteuerung.
 
@@ -81,7 +81,7 @@ Wenn die Raumthermostat-Steuerung aktiviert ist (Options-Flow), wird die Vorlauf
 Anpassung = (Soll-Temperatur - Ist-Temperatur - Offset) × Faktor
 ```
 
-Weitere Informationen: [Raumthermostat](https://guidojeuken-6512.github.io/lambda_heat_pumps/Anwender/raumthermometer/)
+Weitere Informationen: [Raumthermostat](https://grexha.github.io/lambda_heat_pumps/Anwender/raumthermometer/)
 
 ### 3. Flow-Line-Offset
 

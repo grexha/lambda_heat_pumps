@@ -1,6 +1,6 @@
 # ToDo
 
-*Stand 09.11.2026, Branch `feature/lambda-cockpit` (3.7.0)*
+*Stand 15.11.2026, `main` (Version 3.7.1)*
 
 ## Offen aus dem Lambda Cockpit
 
@@ -12,18 +12,40 @@
 
 - [x] ~~**Wärmefahrplan-Sensor firmwareabhängig machen.**~~ Bleibt so (Entscheidung 09.11.2026). `schedule_outside_temperature_calc` nur für Firmware anlegen, deren Soll-Vorlauf (5007) die Rückrechnung zulässt. Im Standby meldet die Lambda 0 °C (derzeit abgefangen: Sensor „unbekannt“).
 - [ ] **Sporadischer „Konfigurationsfehler“ beim Laden des Cockpits.** „Custom element doesn't exist: lambda-cockpit-card“, obwohl die JS-Datei mit HTTP 200 geladen wird; keine Konsolenfehler. Gehäuft kurz nach einem HA-Neustart, Neuladen der Seite hilft. Reproduzierbar mit dem Playwright-Skript gegen den Test-Container.
-  - **Firefox (immer, behoben 09.11.2026, nicht committet):** HA lädt die Karten vor dem eigenen Code und ersetzt in Firefox danach `window.customElements` durch ein Polyfill für „scoped custom element registries“, das die vorher definierten Elemente nicht kennt. Beide Karten melden sich jetzt erneut in der aktuellen Registry an, bis `home-assistant` definiert ist (`lccDefine` / `lecDefine`). Mit Playwright in Firefox und Chrome geprüft.
+  - **Firefox (immer, behoben in 3.7.0):** HA lädt die Karten vor dem eigenen Code und ersetzt in Firefox danach `window.customElements` durch ein Polyfill für „scoped custom element registries“, das die vorher definierten Elemente nicht kennt. Beide Karten melden sich jetzt erneut in der aktuellen Registry an, bis `home-assistant` definiert ist (`lccDefine` / `lecDefine`). Mit Playwright in Firefox und Chrome geprüft.
   - **Chrome/Edge (sporadisch):** beobachten, ob der Fehler mit dieser Änderung auch dort verschwindet.
+- [x] **Hilfeseite je Kachel** (14.11.2026, 3.7.1): `docs/docs/Anwender/lambda-cockpit-kacheln.md`, „?“ an jeder Kachel öffnet den Abschnitt in neuem Tab. Bei neuen Kacheln Abschnitt und Anker mitpflegen (`LCC_HELP_URL`, `_help()`).
 - [ ] **Screenshot des Cockpits für die Doku** (`docs/docs/Anwender/lambda-cockpit.md`).
 - [x] **Options-Screenshot erneuern** (erledigt 09.11.2026): `docs/docs/assets/options_cockpit_de.png` zeigt noch den alten Hilfetext („Ausschalten entfernt das Dashboard nicht“).
 - [ ] **Live-Entfernen bestätigen:** Option im laufenden Betrieb ausschalten → Dashboard verschwindet ohne Neustart (bisher nur über Neustart nachgestellt).
 - [x] **Release-Seite 3.7 und Changelog** geschrieben 09.11.2026 (`docs/docs/Releases/release-3-7.md`, `CHANGELOG.md`, `CHANGELOG_ALL_CHANGES.md`). Beim Release Datum eintragen.
-- [ ] **Doku-Build prüfen:** Bilder innerhalb nummerierter Listen (`lambda-cockpit.md`) im Doku-Check der CI.
+- [x] **Doku-Build prüfen:** Bilder innerhalb nummerierter Listen (`lambda-cockpit.md`) im Doku-Check der CI. Erledigt: 0 Probleme (13.11.2026).
 - [ ] **Standardwerte der Einstellwerte** (Hysteresen, Spreizung, Heizgrenze, max. Temperaturen) mit den Werkseinstellungen der Lambda abgleichen; derzeit Schätzwerte.
+- [x] **Dashboard ließ sich nicht entfernen** (gemeldet 13.11.2026): Ein verwaister Eintrag einer gelöschten Konfiguration im Store `lambda_heat_pumps.dashboard` hielt das Dashboard fest. Behoben (3.7.1), Test dazu.
+- [x] **Simulator `C:\Cursor\modbus_tools`:** Register 5005–5007 und 5105–5107 (Soll-Vorlauf der Heizkreise) ergänzt; ohne sie zeigten Puffer und Heizkreis oben links „–“. Simulator neu starten, damit er sie lädt.
+- [x] **Version 3.7.1** (14.11.2026: Version, Changelogs, Release-Seite) — GitHub-Release mit Zip noch anlegen. Inhalt: Climate-Fix, #160, #167, Hinweise aus #163, Heizkreis-Karte zu #157, Vorlauf-Werte zu #156/#128) — gebaut wird erst auf Anweisung. Changelog-Einträge stehen als „unveröffentlicht“.
+- [x] **Climate-Fix live geprüft** (13.11.2026): auf HA 2026.9.1 (Port 8124) und 2026.11.1 (Port 8125, schlanke Konfiguration `C:\Cursor\ha_test_2611`): Werte da, keine Veraltet-Warnung im Log. Nach dem Release zusätzlich im Log von .131 kontrollieren.
+- [x] **#167 Kompressorstarts heute** (14.11.2026, 3.7.1): Kachel unter „Umschaltungen“, AT-Werte in der Kopfzeile; bestehende Dashboards zeigen sie ohne Neuschreiben.
+- [x] **#166 beantwortet und geschlossen** (14.11.2026): keine zweite Karte im Projekt, Verlinkung angeboten.
+- [x] **GitHub-Issues nach dem Release 3.7.1:** #160, #157, #167 kommentiert und geschlossen (14.11.2026). #156, #163 und #128 bleiben offen; #163 und #128 sind noch nicht kommentiert.
+- [ ] **Plan 3.7.2** steht in der Bugliste (Abschnitt „Plan 3.7.2“), Reihenfolge nach Aufwand und Risiko.
+- [x] **#168 Einheiten normieren** (3.7.2, erledigt 15.11.2026): „Aufnahme“ zeigt 0,00 kW, wenn der Sensor auf kW umgestellt ist; auch Lüfter-Laufprüfung, PV- und Batterie-Leistungen, Energien.
+- [x] **#170 Brauchwasser unten** (3.7.2, erledigt 15.11.2026): Slot `ww_low` im Bild zeigen.
+- [ ] **#169 PV-Überschuss „neg“** (3.7.2): Funktionen und Kodierung live per Websocket an die Karte; Vorzeichen vorher mit dem Melder klären. Behebt auch veraltete `features` nach Options-Änderung.
+- [ ] **#156 Antwort an AndiBo62:** Gespräch zu „Ungereimtheiten PV-Überschuss“ (evtl. wie #169).
+- [ ] **#156 Vorlauf-Werte in der Grafik der Heizkurve** (3.7.2), dazu AT ist: Linien VL Soll (gestrichelt) und VL ist, Werteliste oben links, Zeile unter der Kurve entfällt, Achse erweitern. Details in der Bugliste.
+- [x] **Stützpunkte der Heizkurve** (3.7.2, erledigt 15.11.2026): auf der Hilfeseite im Abschnitt Heizkurve beschrieben (Klick auf die Kästchen öffnet den Wert). Kein ✎ in der Karte; dafür gibt es das „?“.
+- [x] **Cache der Karten** (3.7.2, erledigt 15.11.2026, `_card_digests` in `dashboard.py`): Adresse der Karten-JS mit Prüfwert des Inhalts statt nur der Version, damit Browser auch ohne neue Versionsnummer neu laden (Prod per FileZilla zeigte die alte Karte).
+- [x] **GitHub-Issues geschlossen** (15.11.2026, mit Kommentar): #165 (nicht geplant), #137 (Verhalten der Lambda), #168 und #170 (behoben in 3.7.2, unveröffentlicht).
+- [ ] **Playwright-Skript `ha_session.cjs`** (Scratchpad) nutzt noch Port 8123. Auf Port 8124 umstellen, bevor Browser-Tests laufen.
+- [ ] **Schlanke Test-Konfiguration `C:\Cursor\ha_test_2611`** (ohne Datenbank, nur nötige Dateien) mit Container `ha-2611` (HA 2026.11.1, Port 8125). Ist nicht im Repo; bei Bedarf neu anlegen.
+- [ ] **Heizkreis ohne eigenen Rücklauffühler** (gemeldet 09.11.2026, Prod-Anlage): `hc1_return_line_temperature` (Register 5003) ist dauerhaft „unbekannt“; Kachel Heizkreis zeigt links ein leeres Feld „–“, Schaltpunkte Heizkreis zeigen „RL –“ und „noch – K“. Ein Klick auf die Kachel öffnet `hc1_flow_line_temperature` (ganze Kachel verknüpft, nicht das Feld).
+  - [x] **Leeres Feld ausblenden**, wenn der Heizkreis-Rücklauf keinen Wert hat (3.7.1; auch der Heizkreis-Schaltpunkt entfällt).
+  - **Ersatz für die Schaltpunkte:** ohne Heizkreis-Rücklauf `hp1_return_line_temperature` verwenden. Vorher bei Lambda klären, ob die Regelung in diesem Fall wirklich nach dem WP-Rücklauf schaltet.
 
 ## Später / Verbesserungen
 
-- [ ] **Mehrere Wärmepumpen / Heizkreise** im Cockpit (derzeit nur HP1, BOIL1, BUFF1, HC1; andere nur per Karten-YAML).
+- [x] **Mehrere Heizkreise** umgesetzt (3.7.1): Kachel Heizbetrieb je Heizkreis auf der Hauptseite, Reiter je Heizkreis mit Karte „Lambda Heizkreis“, Reparaturmeldung für bestehende Cockpits; bei einem Heizkreis bleibt alles wie bisher. Offen bleibt: **mehrere Wärmepumpen** im Cockpit (derzeit nur HP1, BOIL1, BUFF1, HC1). Für Heizkreis 2/3 gibt es jetzt eine Schritt-für-Schritt-Anleitung in der Doku (Kopie der Karte, `_hc1_` → `_hc2_`); eine Auswahl in der Karte selbst bleibt offen. **Entschieden (13.11.2026):** eigene Heizkreis-Karte plus Reparaturmeldung, die sie nach Bestätigung ins erzeugte Dashboard einfügt. Details, Risiken und Synergien (VL-Werte und Abweichung in der Heizkurve, fehlender Rücklauffühler, Raumfühler je Heizkreis, Bild Heizkörper/Fußbodenheizung) in der Bugliste bei #157.
 - [ ] **Mehrere Lambda-Anlagen:** Es gibt nur ein Dashboard `lambda-cockpit`; die zuletzt eingerichtete Anlage gewinnt.
 - [ ] **Umbenennungen nach dem Erzeugen** nachführen: Karte löst Entitäten zur Laufzeit über die unique_id auf (Websocket `config/entity_registry/list_for_display`) statt über die beim Erzeugen eingetragenen IDs.
 - [ ] **Interne HA-Schnittstellen beobachten:** `hass.data[LOVELACE_DATA]`, `LovelaceStorage` und der Zugriff auf die Dashboard-Sammlung über den Websocket-Befehl `lovelace/dashboards/delete` (`dashboard.py`). Bei jedem HA-Update kurz testen.
@@ -31,6 +53,6 @@
 
 ## Sonstiges
 
-- [ ] **Test-Container `homeassistant-test`** läuft mit dem Branch und eingeschaltetem Cockpit. Sicherung der Integration 3.6.1 und der `.storage`-Dateien: `C:\Users\Guido\AppData\Local\Temp\claude\bd4e34e3e3afd108\4c63a84f-7db4-481e-b1c8-d6eec93d75aa\scratchpad\ha_test_backup`.
-- [ ] **`BUG_ANALYSE_BRANCH_3.5.md`:** aufgeräumte Fassung liegt uncommittet im Arbeitsverzeichnis.
+- [x] **Test-Container `homeassistant-test`** läuft jetzt auf Port 8124 mit dem Config-Ordner `lambda_heat_pumps2_8_6` (HA 2026.9.1). Der Container `homeassistant` (Port 8123) nutzt das Repo als Config, uncommittete Änderungen sind dort sofort aktiv.
+- [x] **`BUG_ANALYSE_BRANCH_3.5.md`:** aufgeräumte Fassung ist committet.
 - [ ] **`tests/playwright/node_modules`** ist unvollständig (Pakete ohne `package.json`).

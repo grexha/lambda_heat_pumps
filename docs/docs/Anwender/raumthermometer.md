@@ -159,7 +159,7 @@ automation:
 ## Häufige Probleme
 
 ### "Raumthermostat funktioniert nicht" / Register 5004 zeigt 62536
-- **Ursache**: Raumthermostat nicht in den Optionen aktiviert, oder für den Heizkreis kein Sensor eingetragen ([#142](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues/142))
+- **Ursache**: Raumthermostat nicht in den Optionen aktiviert, oder für den Heizkreis kein Sensor eingetragen ([#142](https://github.com/grexha/lambda_heat_pumps/issues/142))
 - **Lösung**: Unter **Konfigurieren** die Option **Raumthermostat-Steuerung** aktivieren und im nächsten Schritt für jeden Heizkreis den Sensor wählen. Hilft das nicht, ein Debug-Log erzeugen (siehe [Debug-Logs erzeugen](debug-logs-erzeugen.md)) und prüfen, ob „Could not send the room temperature“ erscheint
 
 ### "Sensor nicht gefunden"

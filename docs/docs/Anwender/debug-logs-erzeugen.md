@@ -32,5 +32,5 @@ Um Fehler zu analysieren oder detaillierte Abläufe der Integration zu prüfen, 
 
 Zusätzlich zum Log hilft bei vielen Fragen der **Diagnose-Download**: **Einstellungen** → **Geräte & Dienste** → Lambda Heat Pumps → **⋮** beim Eintrag → **Diagnose herunterladen**.
 
-Die Datei enthält die Einstellungen des Eintrags (ohne IP-Adresse), die erkannten Module, das Ergebnis der letzten Abfrage und die **Rohwerte aller Register**, so wie sie von der Lambda kommen. Damit lässt sich z. B. prüfen, ob ein falsch angezeigter Wert schon von der Lambda so geliefert wird. Bitte hängen Sie Log und Diagnose an, wenn Sie ein [GitHub-Issue](https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues) erstellen.
+Die Datei enthält die Einstellungen des Eintrags (ohne IP-Adresse), die erkannten Module, das Ergebnis der letzten Abfrage und die **Rohwerte aller Register**, so wie sie von der Lambda kommen. Damit lässt sich z. B. prüfen, ob ein falsch angezeigter Wert schon von der Lambda so geliefert wird. Bitte hängen Sie Log und Diagnose an, wenn Sie ein [GitHub-Issue](https://github.com/grexha/lambda_heat_pumps/issues) erstellen.
 

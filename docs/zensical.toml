@@ -34,7 +34,7 @@ site_author = "Guido"
 #
 # Read more: https://zensical.org/docs/setup/basics/#copyright
 copyright = """
-Copyright &copy; 2025 Guido Jeuken | <a href="https://github.com/GuidoJeuken-6512/lambda_heat_pumps" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://github.com/GuidoJeuken-6512/lambda_heat_pumps/issues" target="_blank" rel="noopener noreferrer">Issues</a> | <a href="https://github.com/GuidoJeuken-6512/lambda_heat_pumps/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a> | <a href="https://lambda-wp.at/tutorials/" target="_blank" rel="noopener noreferrer">Lambda Anleitungen</a>
+Copyright &copy; 2025 Guido Jeuken | <a href="https://github.com/grexha/lambda_heat_pumps" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://github.com/grexha/lambda_heat_pumps/issues" target="_blank" rel="noopener noreferrer">Issues</a> | <a href="https://github.com/grexha/lambda_heat_pumps/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a> | <a href="https://lambda-wp.at/tutorials/" target="_blank" rel="noopener noreferrer">Lambda Anleitungen</a>
 """
 
 # Das Verzeichnis mit den Markdown-Dateien (relativ zur zensical.toml)
@@ -60,6 +60,7 @@ nav = [
     { "Warmwasser Solltemperatur Steuerung" = "Anwender/warmwasser-solltemperatur.md" },
     { "PV Überschuss Steuerung" = "Anwender/pv_ueberschuss_steuerung.md" },
     { "Lambda Cockpit (Dashboard)" = "Anwender/lambda-cockpit.md" },
+    { "Lambda Cockpit: die Kacheln" = "Anwender/lambda-cockpit-kacheln.md" },
     { "Energieverbrauchsberechnung" = "Anwender/Energieverbrauchsberechnung.md" },
 #    { "Korrektur Verbrauchsberechnung" = "Anwender/energiesensoren-entwicklerwerkzeuge.md" },
     { "COP-Sensoren (Leistungszahl)" = "Anwender/cop-sensoren.md" },
