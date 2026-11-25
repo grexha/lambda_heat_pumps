@@ -4,7 +4,7 @@ title: "Cycling-Sensoren - Technische Dokumentation"
 
 # Cycling-Sensoren - Technische Dokumentation
 
-*Zuletzt geändert am 06.09.2026*
+*Zuletzt geändert am 25.11.2026*
 
 **Stand:** Release 3.5.2 (Rewrite auf [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection)/`tmodbus`, Branch `3.5`; Hintergrund zum Rewrite: [Issue #99](https://github.com/grexha/lambda_heat_pumps/issues/99))
 
@@ -152,6 +152,18 @@ def _handle_rollover(self) -> None:
 existiert nur, um den letzten Tageswert bis zum nächsten Rollover
 festzuhalten, und wird beim Start ebenfalls über `RestoreSensor`
 wiederhergestellt.
+
+### Tageswechsel bei laufendem Betriebszustand
+
+Um 00:00 setzen sich die Tageszähler (`*_cycling_daily`) auf 0. Gezählt wird danach nur, was **nach** Mitternacht passiert. Ein Betriebszustand, der über Mitternacht weiterläuft, zählt nicht erneut:
+
+- Ein Modus, der vor 00:00 begann und danach noch läuft, wurde am Vortag als Flanke gezählt. Der laufende Modus erhöht heute keinen Zähler.
+- Der nächste Wechsel, also Ende des Modus, Wechsel in einen anderen Modus oder ein Kompressorstart, zählt wieder für den neuen Tag.
+- Ein Wechsel genau um 00:00 zählt heute. Ein Wechsel kurz vor Mitternacht, der erst bei einer Abfrage nach Mitternacht erkannt wird, kann in den neuen Tag fallen.
+
+Die Laufzeitzähler (`*_runtime_daily`) rechnen dagegen Zeit. Die Zeit eines Modus, der über Mitternacht läuft, zählt ab 00:00 für den neuen Tag.
+
+Der Vortagswert (`*_cycling_yesterday`) bleibt im Zähler gespeichert, auch wenn der Vortagssensor deaktiviert ist. Er ist dann nicht sichtbar, und der Tageszähler wird trotzdem auf 0 gesetzt. Bis zum Fix in 3.7.2 (#176) brach der Reset bei deaktiviertem Vortagssensor ab, der Tageszähler lief weiter.
 
 ## Cycling-Offsets
 
