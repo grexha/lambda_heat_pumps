@@ -597,11 +597,10 @@ class LambdaCockpitCard extends HTMLElement {
       this.dispatchEvent(new CustomEvent("hass-more-info", { bubbles: true, composed: true, detail: { entityId: ent } }));
     }
   }
-  // The buffer's own setpoint, as the controller reports it. Only when that is not
-  // there is it worked out from the heating circuit and the configured offset.
-  _bufSoll(hcSoll, pv) {
-    const reg = this._n("buf_soll");
-    return Number.isNaN(reg) ? hcSoll + this._bufOff() + pv : reg;
+  // The buffer's setpoint as the controller reports it. Without that value there is
+  // no setpoint to show: one worked out from the heating circuit would be wrong.
+  _bufSoll() {
+    return this._n("buf_soll");
   }
 
   _bufOff() {
@@ -836,7 +835,7 @@ class LambdaCockpitCard extends HTMLElement {
       </div>`;
     const buf = !showBuf ? "" : `
       <div class="ctrl" data-ent="${lccEsc(this._id("buf_top"))}">
-        <div class="cbar"><span class="cval">◀ ${lccFmt(this._bufSoll(hcSoll, 0), 1)}°</span>${st(bState, bRun)}</div>
+        <div class="cbar"><span class="cval">◀ ${lccFmt(this._bufSoll(), 1)}°</span>${st(bState, bRun)}</div>
         <div class="cimg"><svg viewBox="0 0 200 150">
           <defs><linearGradient id="cbf" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6b7280"/><stop offset=".45" stop-color="#d1d5db"/><stop offset="1" stop-color="#4b5563"/></linearGradient></defs>
           <rect x="84" y="14" width="86" height="122" rx="10" fill="url(#cbf)" stroke="#e5e7eb" stroke-width="1"/>
@@ -1274,7 +1273,7 @@ class LambdaCockpitCard extends HTMLElement {
     // Buffer
     const hcSoll = this._n("hc_soll");
     const bPv = pvOn ? this._n("buf_pv_offset") || 0 : 0;
-    const bSoll = this._bufSoll(hcSoll, bPv);
+    const bSoll = this._bufSoll();
     const h25 = this._n("p_buf_ein25");
     const h50 = this._n("p_buf_ein50");
     const bH = h25 + ((h50 - h25) * (lccClamp(bSoll, 25, 50) - 25)) / 25;

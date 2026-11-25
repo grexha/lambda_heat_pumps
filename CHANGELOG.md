@@ -28,7 +28,7 @@
 ### [3.7.3] - unreleased
 
 - Version number: the manifest and both cards showed 3.7.1 in the 3.7.2 release; they now match the release number ([#173](https://github.com/grexha/lambda_heat_pumps/issues/173)).
-- Buffer setpoint: the cockpit shows and calculates with the setpoint the controller reports for the buffer, not the one of the heating circuit ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179)). If that value is missing, the old calculation stays.
+- Buffer setpoint: the cockpit shows and calculates with the setpoint the controller reports for the buffer, not the one of the heating circuit ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179)). If that value is missing, the cockpit shows no setpoint.
 - Daily cycle counters (compressor starts, heating, hot water) go back to 0 at midnight again. Before, the reset stopped when the yesterday sensor was disabled ([#176](https://github.com/grexha/lambda_heat_pumps/issues/176)). A mode that runs over midnight is not counted again.
 
 ### [3.7.1] - 2026-11-14
@@ -138,7 +138,7 @@ Adopted a ground-up rewrite of the integration (PR #115): the Modbus layer moves
 ### [3.7.3] - unveröffentlicht
 
 - Versionsnummer: Im Release 3.7.2 standen Manifest und Karten noch auf 3.7.1. Jetzt stimmen sie mit der Release-Nummer überein ([#173](https://github.com/grexha/lambda_heat_pumps/issues/173)).
-- Puffer-Sollwert: Das Cockpit zeigt und rechnet mit dem Sollwert, den der Controller für den Puffer meldet, nicht mit dem des Heizkreises ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179)). Ist der Wert nicht da, bleibt die alte Berechnung.
+- Puffer-Sollwert: Das Cockpit zeigt und rechnet mit dem Sollwert, den der Controller für den Puffer meldet, nicht mit dem des Heizkreises ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179)). Ist der Wert nicht da, zeigt das Cockpit keinen Sollwert.
 - Tageszähler für Zyklen (Verdichterstarts, Heizen, Warmwasser) gehen um Mitternacht wieder auf 0. Vorher brach der Reset ab, wenn der Vortagessensor deaktiviert war ([#176](https://github.com/grexha/lambda_heat_pumps/issues/176)). Ein Betriebszustand, der über Mitternacht läuft, zählt nicht erneut.
 
 ### [3.7.1] - 2026-11-14
