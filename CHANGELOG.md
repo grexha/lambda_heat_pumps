@@ -25,7 +25,7 @@
 - The browser loads the cards anew whenever their files change, not only with a new version number.
 - Documentation: the help page explains that the three heating-curve points can be changed directly in the cockpit by clicking their boxes under the curve.
 
-### [3.7.3] - unreleased
+### [3.7.3] - 2026-11-25
 
 - Version number: the manifest and both cards showed 3.7.1 in the 3.7.2 release; they now match the release number ([#173](https://github.com/grexha/lambda_heat_pumps/issues/173)).
 - Buffer setpoint: the cockpit shows and calculates with the setpoint the controller reports for the buffer, not the one of the heating circuit ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179)). If that value is missing, the cockpit shows no setpoint.
@@ -135,7 +135,7 @@ Adopted a ground-up rewrite of the integration (PR #115): the Modbus layer moves
 - Der Browser lädt die Karten neu, sobald sich ihre Dateien ändern, nicht erst mit einer neuen Versionsnummer.
 - Doku: Die Hilfeseite erklärt, dass sich die drei Stützpunkte der Heizkurve direkt im Cockpit ändern lassen, per Klick auf die Kästchen unter der Kurve.
 
-### [3.7.3] - unveröffentlicht
+### [3.7.3] - 2026-11-25
 
 - Versionsnummer: Im Release 3.7.2 standen Manifest und Karten noch auf 3.7.1. Jetzt stimmen sie mit der Release-Nummer überein ([#173](https://github.com/grexha/lambda_heat_pumps/issues/173)).
 - Puffer-Sollwert: Das Cockpit zeigt und rechnet mit dem Sollwert, den der Controller für den Puffer meldet, nicht mit dem des Heizkreises ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179)). Ist der Wert nicht da, zeigt das Cockpit keinen Sollwert.
