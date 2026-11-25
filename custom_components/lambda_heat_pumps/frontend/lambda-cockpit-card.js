@@ -10,13 +10,13 @@
 // the card YAML; a slot without an entity hides what depends on it.
 // =====================================================================
 
-const LCC_VERSION = "3.7.1";
+const LCC_VERSION = "3.7.2";
 
 // The slots the card reads. Filled from the card config.
 const LCC_SLOTS = [
   "op", "hpstate", "err", "errnum", "heizstab", "vl", "rl", "flow", "rating", "heat", "power", "cop",
   "at", "at1h", "atcalc", "pv_surplus", "ww_top", "ww_low", "ww_set", "ww_state", "ww_zirk",
-  "ww_zirk_pump", "ww_climate", "ww_pv_offset", "buf_top", "buf_low", "buf_max", "buf_state",
+  "ww_zirk_pump", "ww_climate", "ww_pv_offset", "buf_top", "buf_low", "buf_max", "buf_state", "buf_soll",
   "buf_pv_offset", "hc_vl", "hc_rl", "hc_soll", "hc_state", "offset", "pv_offset", "room", "room_set",
   "raum_soll", "curve_m22", "curve_0", "curve_p22", "curve_calc", "wfp_at", "strom_hz", "strom_ww",
   "strom_abt", "strom_kuehl", "strom_sb", "waerme_hz", "waerme_ww", "waerme_abt", "waerme_kuehl",
@@ -161,7 +161,7 @@ const LCC_KWH_PER = { wh: 1e-3, kwh: 1, mwh: 1e3, gwh: 1e6 };
 
 // Slots added after 3.7.0. A dashboard written before does not list them, so
 // the card looks them up itself.
-const LCC_LATE_KEYS = ["starts_vd"];
+const LCC_LATE_KEYS = ["starts_vd", "buf_soll"];
 
 // The slots that belong to one heating circuit; a further circuit brings its own.
 const LCC_HC_KEYS = [
@@ -392,7 +392,7 @@ class LambdaCockpitCard extends HTMLElement {
       pv_surplus: s("_emgr_actual_power"), ww_top: s("_boil1_actual_high_temperature"),
       ww_low: s("_boil1_actual_low_temperature"), ww_set: s("_boil1_target_high_temperature"),
       ww_state: s("_boil1_operating_state"), ww_zirk_pump: s("_boil1_actual_circulation_pump_state"),
-      ww_climate: find("climate", "_boil1_hot_water"), buf_top: s("_buff1_actual_high_temperature"),
+      ww_climate: find("climate", "_boil1_hot_water"), buf_top: s("_buff1_actual_high_temperature"), buf_soll: s("_buff1_buffer_temperature_high_setpoint"),
       buf_low: s("_buff1_actual_low_temperature"), buf_state: s("_buff1_operating_state"),
       buf_max: n("_buff1_maximum_buffer_temp_number"), hc_vl: s(hc + "flow_line_temperature"),
       hc_rl: s(hc + "return_line_temperature"), hc_soll: s(hc + "target_temp_flow_line"),
@@ -597,6 +597,13 @@ class LambdaCockpitCard extends HTMLElement {
       this.dispatchEvent(new CustomEvent("hass-more-info", { bubbles: true, composed: true, detail: { entityId: ent } }));
     }
   }
+  // The buffer's own setpoint, as the controller reports it. Only when that is not
+  // there is it worked out from the heating circuit and the configured offset.
+  _bufSoll(hcSoll, pv) {
+    const reg = this._n("buf_soll");
+    return Number.isNaN(reg) ? hcSoll + this._bufOff() + pv : reg;
+  }
+
   _bufOff() {
     const v = this._n("p_buf_off");
     return Number.isNaN(v) ? this._config.wp_soll_offset : v;
@@ -829,7 +836,7 @@ class LambdaCockpitCard extends HTMLElement {
       </div>`;
     const buf = !showBuf ? "" : `
       <div class="ctrl" data-ent="${lccEsc(this._id("buf_top"))}">
-        <div class="cbar"><span class="cval">◀ ${lccFmt(hcSoll + this._bufOff(), 1)}°</span>${st(bState, bRun)}</div>
+        <div class="cbar"><span class="cval">◀ ${lccFmt(this._bufSoll(hcSoll, 0), 1)}°</span>${st(bState, bRun)}</div>
         <div class="cimg"><svg viewBox="0 0 200 150">
           <defs><linearGradient id="cbf" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6b7280"/><stop offset=".45" stop-color="#d1d5db"/><stop offset="1" stop-color="#4b5563"/></linearGradient></defs>
           <rect x="84" y="14" width="86" height="122" rx="10" fill="url(#cbf)" stroke="#e5e7eb" stroke-width="1"/>
@@ -1267,7 +1274,7 @@ class LambdaCockpitCard extends HTMLElement {
     // Buffer
     const hcSoll = this._n("hc_soll");
     const bPv = pvOn ? this._n("buf_pv_offset") || 0 : 0;
-    const bSoll = hcSoll + this._bufOff() + bPv;
+    const bSoll = this._bufSoll(hcSoll, bPv);
     const h25 = this._n("p_buf_ein25");
     const h50 = this._n("p_buf_ein50");
     const bH = h25 + ((h50 - h25) * (lccClamp(bSoll, 25, 50) - 25)) / 25;
