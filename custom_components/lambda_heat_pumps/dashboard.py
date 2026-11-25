@@ -107,6 +107,7 @@ _SLOTS: tuple[tuple[str, str, str | None, str], ...] = (
     ("buf_low", "sensor", "buff", "actual_low_temperature"),
     ("buf_max", "number", "buff", "maximum_buffer_temp_number"),
     ("buf_state", "sensor", "buff", "operating_state"),
+    ("buf_soll", "sensor", "buff", "buffer_temperature_high_setpoint"),
     ("buf_pv_offset", "number", "buff", "pv_temperature_increase_number"),
     # Heating circuit
     ("hc_vl", "sensor", "hc", "flow_line_temperature"),
@@ -219,7 +220,7 @@ def _unique_id(entry: LambdaConfigEntry, module: str | None, index: int, key: st
 
 # Slots added after 3.7.0. A dashboard written before does not list them; the
 # card looks them up itself (`LCC_LATE_KEYS` in the card).
-_LATE_SLOTS = ("starts_vd",)
+_LATE_SLOTS = ("starts_vd", "buf_soll")
 
 
 def resolve_entities(
