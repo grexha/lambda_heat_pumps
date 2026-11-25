@@ -86,3 +86,11 @@ class LambdaComponent(Component):
     # Every value the controller exposes lives in holding registers (FC03); it
     # has no input registers, coils or discrete inputs.
     register_space = "holding"
+
+    def register_of(self, field: str) -> str:
+        """Where the controller keeps this field: one register, or the range of a 32-bit value."""
+        declared = self.declared_fields[field]
+        first = self._address(declared)
+        if declared.count > 1:
+            return f"{first}-{first + declared.count - 1}"
+        return str(first)

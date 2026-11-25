@@ -824,6 +824,11 @@ class LambdaRegisterEntity(LambdaEntity):
         """
         return self._component_of(coordinator).declared_fields[self._attribute]
 
+    @property
+    def extra_state_attributes(self) -> dict[str, str]:
+        """The controller register the value is read from, to find it in the Modbus map."""
+        return {"modbus_register": self._component_of(self.coordinator).register_of(self._attribute)}
+
     def _read(self) -> float | str | None:
         """The decoded field, or its label if it is one of the state codes."""
         value = getattr(self._component_of(self.coordinator), self._attribute)
