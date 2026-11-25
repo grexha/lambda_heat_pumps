@@ -824,6 +824,11 @@ class LambdaRegisterEntity(LambdaEntity):
         """
         return self._component_of(coordinator).declared_fields[self._attribute]
 
+    @property
+    def extra_state_attributes(self) -> dict[str, str]:
+        """The controller register the value is read from, to find it in the Modbus map."""
+        return {"modbus_register": self._component_of(self.coordinator).register_of(self._attribute)}
+
     def _read(self) -> float | str | None:
         """The decoded field, or its label if it is one of the state codes."""
         value = getattr(self._component_of(self.coordinator), self._attribute)
@@ -1143,9 +1148,15 @@ class YesterdayCycleSensor(LambdaEntity, RestoreSensor):
 
     @callback
     def set_value(self, value: float) -> None:
-        """Take over the day that just ended."""
+        """Take over the day that just ended.
+
+        The sensor is disabled by default and then never added to Home
+        Assistant, so it has no hass to write to. The value is kept either way,
+        and restored when the sensor is enabled later.
+        """
         self._value = value
-        self.async_write_ha_state()
+        if self.hass is not None:
+            self.async_write_ha_state()
 
 
 class LambdaCopSensor(LambdaEntity, SensorEntity):

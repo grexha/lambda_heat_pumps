@@ -17,13 +17,19 @@
 > - **Firmware 3+ (from V0.0.5-3K, incl. V0.0.10/V1.0.4/V1.1.0): `hcX_flow_line_temperature_setpoint` is gone.** On this firmware, heating-circuit register 7 is the read-only target flow temperature the controller works with, not a writable setpoint request ([#112](https://github.com/grexha/lambda_heat_pumps/issues/112), 3.5.5). Its replacement is `hcX_target_temp_flow_line`. The old entity stays behind as "no longer provided", and dashboards, helpers and automations using it break silently. → To keep the history: delete the orphaned `…_flow_line_temperature_setpoint` entity, then rename `…_target_temp_flow_line` to the old entity_id (Settings → Entities → entity → ⚙ → Entity ID).
 > - Back up before upgrading.
 
-### [3.7.2] - unreleased
+### [3.7.2] - 2026-11-15
 
 **Lambda Cockpit:**
 - Values in kW, Wh, MWh or minutes: if you switch the display unit of a power, energy or runtime sensor (e.g. the power consumption to kW), the cockpit converts it instead of showing 0.00 kW; the fan animation follows as well ([#168](https://github.com/grexha/lambda_heat_pumps/issues/168)).
 - Hot water shows the temperature at the bottom sensor as well, like the buffer ([#170](https://github.com/grexha/lambda_heat_pumps/issues/170)).
 - The browser loads the cards anew whenever their files change, not only with a new version number.
 - Documentation: the help page explains that the three heating-curve points can be changed directly in the cockpit by clicking their boxes under the curve.
+
+### [3.7.3] - unreleased
+
+- Version number: the manifest and both cards showed 3.7.1 in the 3.7.2 release; they now match the release number ([#173](https://github.com/grexha/lambda_heat_pumps/issues/173)).
+- Buffer setpoint: the cockpit shows and calculates with the setpoint the controller reports for the buffer, not the one of the heating circuit ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179)). If that value is missing, the cockpit shows no setpoint.
+- Daily cycle counters (compressor starts, heating, hot water) go back to 0 at midnight again. Before, the reset stopped when the yesterday sensor was disabled ([#176](https://github.com/grexha/lambda_heat_pumps/issues/176)). A mode that runs over midnight is not counted again.
 
 ### [3.7.1] - 2026-11-14
 
@@ -121,13 +127,19 @@ Adopted a ground-up rewrite of the integration (PR #115): the Modbus layer moves
 > - **Firmware 3+ (ab V0.0.5-3K, inkl. V0.0.10/V1.0.4/V1.1.0): `hcX_flow_line_temperature_setpoint` entfällt.** Auf dieser Firmware ist Heizkreis-Register 7 die schreibgeschützte Vorlauf-Solltemperatur, mit der die Steuerung arbeitet, keine beschreibbare Sollwert-Anforderung ([#112](https://github.com/grexha/lambda_heat_pumps/issues/112), 3.5.5). Ersatz ist `hcX_target_temp_flow_line`. Die alte Entität bleibt als „nicht mehr bereitgestellt“ zurück; Dashboards, Helfer und Automationen, die sie nutzen, brechen stillschweigend. → Um den Verlauf zu behalten: die verwaiste `…_flow_line_temperature_setpoint`-Entität löschen, dann `…_target_temp_flow_line` auf die alte entity_id umbenennen (Einstellungen → Entitäten → Entität → ⚙ → Entitäts-ID).
 > - Vor dem Update ein Backup erstellen.
 
-### [3.7.2] - unveröffentlicht
+### [3.7.2] - 2026-11-15
 
 **Lambda Cockpit:**
 - Werte in kW, Wh, MWh oder Minuten: Wer die Anzeigeeinheit eines Leistungs-, Energie- oder Laufzeitsensors umstellt (z. B. die Leistungsaufnahme auf kW), bekommt im Cockpit den richtigen Wert statt 0,00 kW; auch die Lüfter-Animation stimmt dann ([#168](https://github.com/grexha/lambda_heat_pumps/issues/168)).
 - Brauchwasser zeigt zusätzlich die Temperatur am unteren Fühler, wie der Puffer ([#170](https://github.com/grexha/lambda_heat_pumps/issues/170)).
 - Der Browser lädt die Karten neu, sobald sich ihre Dateien ändern, nicht erst mit einer neuen Versionsnummer.
 - Doku: Die Hilfeseite erklärt, dass sich die drei Stützpunkte der Heizkurve direkt im Cockpit ändern lassen, per Klick auf die Kästchen unter der Kurve.
+
+### [3.7.3] - unveröffentlicht
+
+- Versionsnummer: Im Release 3.7.2 standen Manifest und Karten noch auf 3.7.1. Jetzt stimmen sie mit der Release-Nummer überein ([#173](https://github.com/grexha/lambda_heat_pumps/issues/173)).
+- Puffer-Sollwert: Das Cockpit zeigt und rechnet mit dem Sollwert, den der Controller für den Puffer meldet, nicht mit dem des Heizkreises ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179)). Ist der Wert nicht da, zeigt das Cockpit keinen Sollwert.
+- Tageszähler für Zyklen (Verdichterstarts, Heizen, Warmwasser) gehen um Mitternacht wieder auf 0. Vorher brach der Reset ab, wenn der Vortagessensor deaktiviert war ([#176](https://github.com/grexha/lambda_heat_pumps/issues/176)). Ein Betriebszustand, der über Mitternacht läuft, zählt nicht erneut.
 
 ### [3.7.1] - 2026-11-14
 
