@@ -24,6 +24,9 @@
 - Hot water shows the temperature at the bottom sensor as well, like the buffer ([#170](https://github.com/grexha/lambda_heat_pumps/issues/170)).
 - The browser loads the cards anew whenever their files change, not only with a new version number.
 - Documentation: the help page explains that the three heating-curve points can be changed directly in the cockpit by clicking their boxes under the curve.
+- Version number: manifest and both cards now show 3.7.2, not 3.7.1 ([#173](https://github.com/grexha/lambda_heat_pumps/issues/173)).
+- Buffer setpoint: the cockpit shows and calculates with the setpoint the controller reports for the buffer, not the one of the heating circuit ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179)). If that value is missing, the old calculation stays.
+- Daily cycle counters (compressor starts, heating, hot water) go back to 0 at midnight again. Before, the reset stopped when the yesterday sensor was disabled ([#176](https://github.com/grexha/lambda_heat_pumps/issues/176)). A mode that runs over midnight is not counted again.
 
 ### [3.7.1] - 2026-11-14
 
@@ -128,6 +131,9 @@ Adopted a ground-up rewrite of the integration (PR #115): the Modbus layer moves
 - Brauchwasser zeigt zusätzlich die Temperatur am unteren Fühler, wie der Puffer ([#170](https://github.com/grexha/lambda_heat_pumps/issues/170)).
 - Der Browser lädt die Karten neu, sobald sich ihre Dateien ändern, nicht erst mit einer neuen Versionsnummer.
 - Doku: Die Hilfeseite erklärt, dass sich die drei Stützpunkte der Heizkurve direkt im Cockpit ändern lassen, per Klick auf die Kästchen unter der Kurve.
+- Versionsnummer: Manifest und beide Karten zeigen 3.7.2 an, nicht mehr 3.7.1 ([#173](https://github.com/grexha/lambda_heat_pumps/issues/173)).
+- Puffer-Sollwert: Das Cockpit zeigt und rechnet mit dem Sollwert, den der Controller für den Puffer meldet, nicht mit dem des Heizkreises ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179)). Ist der Wert nicht da, bleibt die alte Berechnung.
+- Tageszähler für Zyklen (Verdichterstarts, Heizen, Warmwasser) gehen um Mitternacht wieder auf 0. Vorher brach der Reset ab, wenn der Vortagessensor deaktiviert war ([#176](https://github.com/grexha/lambda_heat_pumps/issues/176)). Ein Betriebszustand, der über Mitternacht läuft, zählt nicht erneut.
 
 ### [3.7.1] - 2026-11-14
 
