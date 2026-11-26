@@ -59,7 +59,7 @@ Im Bild: Rücklauf, Vorlauf und Raum-Soll; bei eingeschalteter Raumthermostat-St
 
 **Raum-Soll:** die Raum-Solltemperatur des Heizkreises (wird in die Lambda geschrieben).
 
-Das Bild zeigt eine Fußbodenheizung. Für Heizkörper in der Karten-YAML `heating_type: radiator` eintragen.
+Das Bild zeigt eine Fußbodenheizung. Für Heizkörper in der Karten-YAML `heating_type: radiator` eintragen; bei mehreren Heizkreisen geht das auch je Heizkreis (siehe [Mehrere Heizkreise](lambda-cockpit.md#mehrere-heizkreise)).
 
 Bei mehreren Heizkreisen steht diese Kachel für jeden Heizkreis auf der Hauptseite, nummeriert („Heizkreis 1“, „Heizkreis 2“ …). Heizkurve, Schaltpunkt und Grenzwerte stehen dann auf dem Reiter des jeweiligen Heizkreises (siehe [Karte Lambda Heizkreis](#karte-lambda-heizkreis)).
 
