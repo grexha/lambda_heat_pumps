@@ -7,7 +7,20 @@
 
 > **📚 Documentation**: A German documentation is currently being built at [https://grexha.github.io/lambda_heat_pumps](https://grexha.github.io/lambda_heat_pumps)
 
-### [3.7.2] - unreleased
+### [3.7.4] - unreleased
+
+**Lambda Cockpit:**
+- Settings tab (button *Settings*): the buffer setpoint can take its value from any temperature sensor Home Assistant knows, or from the controller (default). The fallback calculation from the heating circuit setpoint and the buffer offset is switched on there and is off by default. Each heating circuit can be shown as radiators or underfloor heating ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179), [#181](https://github.com/grexha/lambda_heat_pumps/issues/181)). The settings are stored in Home Assistant, so they survive a rewrite of the dashboard and restarts. Help: [Lambda Cockpit: Settings](https://grexha.github.io/lambda_heat_pumps/Anwender/lambda-cockpit-einstellungen/) (German).
+- Fallback calculation with several heating circuits: it takes the highest flow setpoint of all circuits, and only shows a value between 0 and 90 °C.
+
+### [3.7.3] - 2026-11-25
+
+- Version number: the manifest and both cards now match the release number ([#173](https://github.com/grexha/lambda_heat_pumps/issues/173)).
+- Buffer setpoint: the cockpit shows the setpoint the controller reports, not the heating-circuit one; without that value no setpoint ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179)).
+- Daily cycle counters go back to 0 at midnight again, even when the yesterday sensor is disabled ([#176](https://github.com/grexha/lambda_heat_pumps/issues/176)).
+- Register sensors name their Modbus register in the attribute `modbus_register`; with 32-bit values as a range, e.g. `1020-1021` ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179) for the buffer setpoint register 3004).
+
+### [3.7.2] - 2026-11-15
 
 **Lambda Cockpit:**
 - Values in kW, Wh, MWh or minutes: if you switch the display unit of a power, energy or runtime sensor (e.g. the power consumption to kW), the cockpit converts it instead of showing 0.00 kW; the fan animation follows as well ([#168](https://github.com/grexha/lambda_heat_pumps/issues/168)).
@@ -533,7 +546,20 @@ This release contains significant changes to the Entity Registry and sensor nami
 
 > **📚 Dokumentation**: Eine deutsche Dokumentation wird derzeit unter [https://grexha.github.io/lambda_heat_pumps](https://grexha.github.io/lambda_heat_pumps) aufgebaut
 
-### [3.7.2] - unveröffentlicht
+### [3.7.4] - unveröffentlicht
+
+**Lambda Cockpit:**
+- Tab **Einstellungen** (Schaltfläche *Einstellungen*): Der Puffer-Sollwert lässt sich von einem beliebigen Temperatursensor aus Home Assistant nehmen, sonst gilt der Wert der Lambda. Die Ausweichrechnung aus Heizkreis-Sollwert und Puffer-Offset lässt sich dort einschalten und ist standardmäßig aus. Je Heizkreis lässt sich Heizkörper oder Fußbodenheizung wählen ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179), [#181](https://github.com/grexha/lambda_heat_pumps/issues/181)). Die Einstellungen liegen in Home Assistant und überstehen das Neuschreiben des Dashboards und Neustarts. Hilfe: [Lambda Cockpit: Einstellungen](https://grexha.github.io/lambda_heat_pumps/Anwender/lambda-cockpit-einstellungen/).
+- Ausweichrechnung bei mehreren Heizkreisen: Sie nimmt den höchsten Vorlauf-Sollwert aller Kreise und zeigt nur einen Wert zwischen 0 und 90 °C.
+
+### [3.7.3] - 2026-11-25
+
+- Versionsnummer: Manifest und beide Karten stimmen mit der Release-Nummer überein ([#173](https://github.com/grexha/lambda_heat_pumps/issues/173)).
+- Puffer-Sollwert: Das Cockpit zeigt den Sollwert, den die Lambda meldet, nicht den des Heizkreises; ohne Wert kein Sollwert ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179)).
+- Tageszähler für Zyklen gehen um 0 Uhr wieder auf 0, auch wenn der Vortagessensor deaktiviert ist ([#176](https://github.com/grexha/lambda_heat_pumps/issues/176)).
+- Registersensoren nennen ihr Modbus-Register im Attribut `modbus_register`, bei 32-Bit-Werten als Bereich, z. B. `1020-1021` (Puffer-Sollwert: Register 3004, siehe [#179](https://github.com/grexha/lambda_heat_pumps/issues/179)).
+
+### [3.7.2] - 2026-11-15
 
 **Lambda Cockpit:**
 - Werte in kW, Wh, MWh oder Minuten: Wer die Anzeigeeinheit eines Leistungs-, Energie- oder Laufzeitsensors umstellt (z. B. die Leistungsaufnahme auf kW), bekommt im Cockpit den richtigen Wert statt 0,00 kW; auch die Lüfter-Animation stimmt dann ([#168](https://github.com/grexha/lambda_heat_pumps/issues/168)).

@@ -17,6 +17,19 @@
 > - **Firmware 3+ (from V0.0.5-3K, incl. V0.0.10/V1.0.4/V1.1.0): `hcX_flow_line_temperature_setpoint` is gone.** On this firmware, heating-circuit register 7 is the read-only target flow temperature the controller works with, not a writable setpoint request ([#112](https://github.com/grexha/lambda_heat_pumps/issues/112), 3.5.5). Its replacement is `hcX_target_temp_flow_line`. The old entity stays behind as "no longer provided", and dashboards, helpers and automations using it break silently. → To keep the history: delete the orphaned `…_flow_line_temperature_setpoint` entity, then rename `…_target_temp_flow_line` to the old entity_id (Settings → Entities → entity → ⚙ → Entity ID).
 > - Back up before upgrading.
 
+### [3.7.4] - unreleased
+
+**Lambda Cockpit:**
+- Settings tab (button *Settings*): the buffer setpoint can take its value from any temperature sensor Home Assistant knows, or from the controller (default). The fallback calculation from the heating circuit setpoint and the buffer offset is switched on there and is off by default. Each heating circuit can be shown as radiators or underfloor heating ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179), [#181](https://github.com/grexha/lambda_heat_pumps/issues/181)). The settings are stored in Home Assistant, so they survive a rewrite of the dashboard and restarts. Help: [Lambda Cockpit: Settings](https://grexha.github.io/lambda_heat_pumps/Anwender/lambda-cockpit-einstellungen/) (German).
+- Fallback calculation with several heating circuits: it takes the highest flow setpoint of all circuits, and only shows a value between 0 and 90 °C.
+
+### [3.7.3] - 2026-11-25
+
+- Version number: the manifest and both cards showed 3.7.1 in the 3.7.2 release; they now match the release number ([#173](https://github.com/grexha/lambda_heat_pumps/issues/173)).
+- Buffer setpoint: the cockpit shows and calculates with the setpoint the controller reports for the buffer, not the one of the heating circuit ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179)). If that value is missing, the cockpit shows no setpoint.
+- Daily cycle counters (compressor starts, heating, hot water) go back to 0 at midnight again. Before, the reset stopped when the yesterday sensor was disabled ([#176](https://github.com/grexha/lambda_heat_pumps/issues/176)). A mode that runs over midnight is not counted again.
+- Register sensors name their Modbus register in the attribute `modbus_register`; with 32-bit values as a range, e.g. `1020-1021` ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179) for the buffer setpoint register 3004).
+
 ### [3.7.2] - 2026-11-15
 
 **Lambda Cockpit:**
@@ -24,12 +37,6 @@
 - Hot water shows the temperature at the bottom sensor as well, like the buffer ([#170](https://github.com/grexha/lambda_heat_pumps/issues/170)).
 - The browser loads the cards anew whenever their files change, not only with a new version number.
 - Documentation: the help page explains that the three heating-curve points can be changed directly in the cockpit by clicking their boxes under the curve.
-
-### [3.7.3] - 2026-11-25
-
-- Version number: the manifest and both cards showed 3.7.1 in the 3.7.2 release; they now match the release number ([#173](https://github.com/grexha/lambda_heat_pumps/issues/173)).
-- Buffer setpoint: the cockpit shows and calculates with the setpoint the controller reports for the buffer, not the one of the heating circuit ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179)). If that value is missing, the cockpit shows no setpoint.
-- Daily cycle counters (compressor starts, heating, hot water) go back to 0 at midnight again. Before, the reset stopped when the yesterday sensor was disabled ([#176](https://github.com/grexha/lambda_heat_pumps/issues/176)). A mode that runs over midnight is not counted again.
 
 ### [3.7.1] - 2026-11-14
 
@@ -113,6 +120,7 @@ Follow-up to the 3.5.0 rewrite adoption: fixed three gaps found by auditing ever
 Adopted a ground-up rewrite of the integration (PR #115): the Modbus layer moves from `pymodbus` to [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection)/`tmodbus`, heat pumps and other modules are addressed by index and object reference instead of reconstructed entity-id strings (removing the bug class behind Issues #93/#107), and counters persist via plain Home Assistant `RestoreSensor`s. Minimum Home Assistant version is now 2026.9.0. See [CHANGELOG_ALL_CHANGES.md](CHANGELOG_ALL_CHANGES.md) for the full breakdown.
 
 <!-- /lang:en -->
+
 ## Deutsche Version {#deutsche-version}
 
 <!-- lang:de -->
@@ -127,6 +135,19 @@ Adopted a ground-up rewrite of the integration (PR #115): the Modbus layer moves
 > - **Firmware 3+ (ab V0.0.5-3K, inkl. V0.0.10/V1.0.4/V1.1.0): `hcX_flow_line_temperature_setpoint` entfällt.** Auf dieser Firmware ist Heizkreis-Register 7 die schreibgeschützte Vorlauf-Solltemperatur, mit der die Steuerung arbeitet, keine beschreibbare Sollwert-Anforderung ([#112](https://github.com/grexha/lambda_heat_pumps/issues/112), 3.5.5). Ersatz ist `hcX_target_temp_flow_line`. Die alte Entität bleibt als „nicht mehr bereitgestellt“ zurück; Dashboards, Helfer und Automationen, die sie nutzen, brechen stillschweigend. → Um den Verlauf zu behalten: die verwaiste `…_flow_line_temperature_setpoint`-Entität löschen, dann `…_target_temp_flow_line` auf die alte entity_id umbenennen (Einstellungen → Entitäten → Entität → ⚙ → Entitäts-ID).
 > - Vor dem Update ein Backup erstellen.
 
+### [3.7.4] - unveröffentlicht
+
+**Lambda Cockpit:**
+- Tab **Einstellungen** (Schaltfläche *Einstellungen*): Der Puffer-Sollwert lässt sich von einem beliebigen Temperatursensor aus Home Assistant nehmen, sonst gilt der Wert der Lambda. Die Ausweichrechnung aus Heizkreis-Sollwert und Puffer-Offset lässt sich dort einschalten und ist standardmäßig aus. Je Heizkreis lässt sich Heizkörper oder Fußbodenheizung wählen ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179), [#181](https://github.com/grexha/lambda_heat_pumps/issues/181)). Die Einstellungen liegen in Home Assistant und überstehen das Neuschreiben des Dashboards und Neustarts. Hilfe: [Lambda Cockpit: Einstellungen](https://grexha.github.io/lambda_heat_pumps/Anwender/lambda-cockpit-einstellungen/).
+- Ausweichrechnung bei mehreren Heizkreisen: Sie nimmt den höchsten Vorlauf-Sollwert aller Kreise und zeigt nur einen Wert zwischen 0 und 90 °C.
+
+### [3.7.3] - 2026-11-25
+
+- Versionsnummer: Im Release 3.7.2 standen Manifest und Karten noch auf 3.7.1. Jetzt stimmen sie mit der Release-Nummer überein ([#173](https://github.com/grexha/lambda_heat_pumps/issues/173)).
+- Puffer-Sollwert: Das Cockpit zeigt und rechnet mit dem Sollwert, den der Controller für den Puffer meldet, nicht mit dem des Heizkreises ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179)). Ist der Wert nicht da, zeigt das Cockpit keinen Sollwert.
+- Tageszähler für Zyklen (Verdichterstarts, Heizen, Warmwasser) gehen um Mitternacht wieder auf 0. Vorher brach der Reset ab, wenn der Vortagessensor deaktiviert war ([#176](https://github.com/grexha/lambda_heat_pumps/issues/176)). Ein Betriebszustand, der über Mitternacht läuft, zählt nicht erneut.
+- Registersensoren nennen ihr Modbus-Register im Attribut `modbus_register`, bei 32-Bit-Werten als Bereich, z. B. `1020-1021` (Puffer-Sollwert: Register 3004, siehe [#179](https://github.com/grexha/lambda_heat_pumps/issues/179)).
+
 ### [3.7.2] - 2026-11-15
 
 **Lambda Cockpit:**
@@ -134,12 +155,6 @@ Adopted a ground-up rewrite of the integration (PR #115): the Modbus layer moves
 - Brauchwasser zeigt zusätzlich die Temperatur am unteren Fühler, wie der Puffer ([#170](https://github.com/grexha/lambda_heat_pumps/issues/170)).
 - Der Browser lädt die Karten neu, sobald sich ihre Dateien ändern, nicht erst mit einer neuen Versionsnummer.
 - Doku: Die Hilfeseite erklärt, dass sich die drei Stützpunkte der Heizkurve direkt im Cockpit ändern lassen, per Klick auf die Kästchen unter der Kurve.
-
-### [3.7.3] - 2026-11-25
-
-- Versionsnummer: Im Release 3.7.2 standen Manifest und Karten noch auf 3.7.1. Jetzt stimmen sie mit der Release-Nummer überein ([#173](https://github.com/grexha/lambda_heat_pumps/issues/173)).
-- Puffer-Sollwert: Das Cockpit zeigt und rechnet mit dem Sollwert, den der Controller für den Puffer meldet, nicht mit dem des Heizkreises ([#179](https://github.com/grexha/lambda_heat_pumps/issues/179)). Ist der Wert nicht da, zeigt das Cockpit keinen Sollwert.
-- Tageszähler für Zyklen (Verdichterstarts, Heizen, Warmwasser) gehen um Mitternacht wieder auf 0. Vorher brach der Reset ab, wenn der Vortagessensor deaktiviert war ([#176](https://github.com/grexha/lambda_heat_pumps/issues/176)). Ein Betriebszustand, der über Mitternacht läuft, zählt nicht erneut.
 
 ### [3.7.1] - 2026-11-14
 
@@ -223,3 +238,4 @@ Nachzieharbeiten zur 3.5.0-Rewrite-Übernahme: drei Lücken behoben, gefunden be
 Übernahme eines von Grund auf neu geschriebenen Codes für die Integration (PR #115): Die Modbus-Schicht wechselt von `pymodbus` zu [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection)/`tmodbus`, Wärmepumpen und andere Module werden über Index und Objektreferenz statt rekonstruierter entity_id-Strings adressiert (behebt die Fehlerklasse hinter den Issues #93/#107), und Zähler persistieren über normale Home-Assistant-`RestoreSensor`s. Mindest-Home-Assistant-Version ist jetzt 2026.9.0. Vollständige Aufschlüsselung siehe [CHANGELOG_ALL_CHANGES.md](CHANGELOG_ALL_CHANGES.md).
 
 <!-- /lang:de -->
+
