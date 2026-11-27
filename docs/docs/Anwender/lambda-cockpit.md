@@ -4,7 +4,7 @@ title: "Lambda Cockpit"
 
 # Lambda Cockpit
 
-*Zuletzt geändert am 14.11.2026*
+*Zuletzt geändert am 27.11.2026*
 
 Ab Version 3.7.0 bringt die Integration ein fertiges Dashboard mit: das **Lambda Cockpit**. Es zeigt die Wärmepumpe auf einer Seite, mit animierter Außeneinheit, Warmwasser, Puffer und Heizkreis im Stil der Lambda-Regelung, Heizkurve mit Wärmefahrplan, Schaltpunkten, Laufzeiten, Energie und Jahresarbeitszahl. Dazu kommt eine Übersicht aller Entitäten der Integration, sortiert nach Modulen und mit einer Erklärung zu jedem Wert.
 

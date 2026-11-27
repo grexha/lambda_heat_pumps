@@ -4,7 +4,7 @@ title: "Offsets – Historische Daten übernehmen"
 
 # Offsets – Historische Daten übernehmen
 
-*Zuletzt geändert am 17.10.2026*
+*Zuletzt geändert am 27.11.2026*
 
 Offsets ermöglichen es, historische Zähler- und Verbrauchswerte nahtlos fortzuführen – etwa nach dem Austausch einer Wärmepumpe, nach einem Zählerreset oder zur Korrektur eines falschen Ausgangswertes. Die Integration unterstützt zwei unabhängige Offset-Typen:
 

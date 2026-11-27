@@ -4,7 +4,7 @@ title: "Optionen des config_flow"
 
 # Optionen der Integration („Konfigurieren“)
 
-*Zuletzt geändert am 09.11.2026*
+*Zuletzt geändert am 27.11.2026*
 
 <div style="display: flex; gap: 20px; align-items: flex-start; margin: 20px 0; flex-wrap: wrap;">
   <div style="flex: 0 0 50%; min-width: 300px;">
