@@ -35,6 +35,7 @@ from .const import (
     REGISTER_ORDER_HIGH_FIRST,
     REGISTER_ORDER_LOW_FIRST,
 )
+from .cockpit_settings import async_register_commands as async_register_cockpit_settings
 from .config_file import FILENAME as CONFIG_FILENAME
 from .coordinator import LambdaConfigEntry, LambdaCoordinator
 from .dashboard import async_setup_dashboard
@@ -48,6 +49,7 @@ PLATFORMS = [Platform.CLIMATE, Platform.NUMBER, Platform.SENSOR]
 
 async def async_setup_entry(hass: HomeAssistant, entry: LambdaConfigEntry) -> bool:
     """Set up a Lambda controller from a config entry."""
+    async_register_cockpit_settings(hass)
     # The port and unit id are read straight into a Modbus frame, which needs
     # ints; the number selector that set them hands back floats, and older
     # entries were stored that way.

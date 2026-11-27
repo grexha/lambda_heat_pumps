@@ -46,6 +46,10 @@ const LCC_TEXT = {
     tariff_title: "NETZENTGELT-FENSTER", tariff_left: "Noch {0} in dieser Tarifzone",
     actions: "AKTIONEN",
     functions_btn: "Funktionen & Zähler", active: "aktiv",
+    settings_btn: "Einstellungen", settings_title: "Einstellungen", buf_sensor_title: "Puffer-Sollwert",
+    buf_auto: "Automatisch (Wert der Steuerung)", buf_fallback_label: "Ausweichrechnung, wenn kein Wert da ist",
+    buf_fallback_info: "Rechnet den Sollwert aus Heizkreis-Sollwert und Puffer-Offset. Nur für Fälle ohne Wert der Steuerung; nur innerhalb 0 bis 90 °C.",
+    circuit_type_title: "Heizkörper oder Fußbodenheizung", circuit: "Heizkreis", type_floor: "Fußbodenheizung", type_radiator: "Heizkörper",
     runtimes: "LAUFZEITEN HEUTE", rt_heating: "Heizen", rt_dhw: "Warmwasser", rt_defrost: "Abtauen",
     rt_rod: "Heizstab", rt_rest: "Ruhe/Sonst.", starts_heating: "Starts Heizen", starts_dhw: "Starts WW",
     switches: "Umschaltungen", energy_today: "ENERGIE HEUTE", power: "Strom", heat: "Wärme",
@@ -98,6 +102,10 @@ const LCC_TEXT = {
     tariff_title: "GRID TARIFF WINDOWS", tariff_left: "{0} left in this tariff zone",
     actions: "ACTIONS",
     functions_btn: "Functions & counters", active: "on",
+    settings_btn: "Settings", settings_title: "Settings", buf_sensor_title: "Buffer setpoint",
+    buf_auto: "Automatic (controller value)", buf_fallback_label: "Fallback calculation when no value is there",
+    buf_fallback_info: "Works out the setpoint from the heating circuit setpoint and the buffer offset. Only when the controller has no value; only within 0 to 90 °C.",
+    circuit_type_title: "Radiators or underfloor heating", circuit: "Heating circuit", type_floor: "Underfloor heating", type_radiator: "Radiators",
     runtimes: "RUNTIMES TODAY", rt_heating: "Heating", rt_dhw: "Hot water", rt_defrost: "Defrost",
     rt_rod: "Heating rod", rt_rest: "Idle/other", starts_heating: "heating starts", starts_dhw: "DHW starts",
     switches: "switches", energy_today: "ENERGY TODAY", power: "Power", heat: "Heat",
@@ -300,6 +308,12 @@ class LambdaCockpitCard extends HTMLElement {
     if (!this.shadowRoot) {
       this.attachShadow({ mode: "open" });
       this.shadowRoot.addEventListener("click", (ev) => this._onClick(ev));
+      this.shadowRoot.addEventListener("change", (ev) => {
+        const el = ev.target;
+        if (!el || !el.dataset || !el.dataset.setting) return;
+        const value = el.type === "checkbox" ? el.checked : el.value || null;
+        this._setSetting(el.dataset.setting, value);
+      });
       // A render replaces the whole card. One landing between pressing and
       // releasing a button would swallow the click, so none happens while a
       // button is held; the one that was due follows on release.
@@ -334,6 +348,7 @@ class LambdaCockpitCard extends HTMLElement {
 
   set hass(hass) {
     this._hass = hass;
+    if (!this._settings && !this._settingsLoading) this._loadSettings();
     const lang = String((hass.locale && hass.locale.language) || hass.language || "de");
     LCC_LANG = lang.startsWith("de") ? "de" : "en";
     if (!this._resolved && !Object.keys(this._config.entities).some((k) => k !== "sun")) {
@@ -587,6 +602,9 @@ class LambdaCockpitCard extends HTMLElement {
       this._render();
     } else if (act === "noop") {
       return;
+    } else if (act === "settings-popup") {
+      this._popup = "settings";
+      this._render();
     } else if (act === "popup") {
       this._popup = "functions";
       this._render();
@@ -597,10 +615,20 @@ class LambdaCockpitCard extends HTMLElement {
       this.dispatchEvent(new CustomEvent("hass-more-info", { bubbles: true, composed: true, detail: { entityId: ent } }));
     }
   }
-  // The buffer's setpoint as the controller reports it. Without that value there is
-  // no setpoint to show: one worked out from the heating circuit would be wrong.
-  _bufSoll() {
-    return this._n("buf_soll");
+  // The buffer's setpoint: the sensor chosen in the settings, else the controller's own
+  // value. The calculated fallback is only used when the settings switch it on, and only
+  // if the result lies in the buffer's range (0 to 90 °C).
+  _bufSoll(hcSoll, pv) {
+    const s = this._settings || {};
+    if (s.buffer_setpoint_sensor && this._hass.states[s.buffer_setpoint_sensor]) {
+      const v = parseFloat(this._hass.states[s.buffer_setpoint_sensor].state);
+      if (!Number.isNaN(v)) return v;
+    }
+    const reg = this._n("buf_soll");
+    if (!Number.isNaN(reg)) return reg;
+    if (!s.buffer_fallback || Number.isNaN(hcSoll)) return NaN;
+    const calc = hcSoll + this._bufOff() + pv;
+    return calc >= 0 && calc <= 90 ? calc : NaN;
   }
 
   _bufOff() {
@@ -835,7 +863,7 @@ class LambdaCockpitCard extends HTMLElement {
       </div>`;
     const buf = !showBuf ? "" : `
       <div class="ctrl" data-ent="${lccEsc(this._id("buf_top"))}">
-        <div class="cbar"><span class="cval">◀ ${lccFmt(this._bufSoll(), 1)}°</span>${st(bState, bRun)}</div>
+        <div class="cbar"><span class="cval">◀ ${lccFmt(this._bufSoll(hcSoll, 0), 1)}°</span>${st(bState, bRun)}</div>
         <div class="cimg"><svg viewBox="0 0 200 150">
           <defs><linearGradient id="cbf" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6b7280"/><stop offset=".45" stop-color="#d1d5db"/><stop offset="1" stop-color="#4b5563"/></linearGradient></defs>
           <rect x="84" y="14" width="86" height="122" rx="10" fill="url(#cbf)" stroke="#e5e7eb" stroke-width="1"/>
@@ -873,7 +901,7 @@ class LambdaCockpitCard extends HTMLElement {
     const hcRun = /^(heating|eco)$/i.test(String(hcState).trim());
     const circuit = parseInt(this._config.circuit, 10) || 1;
     let emitter;
-    if (this._config.heating_type === "radiator") {
+    if (this._heatingType() === "radiator") {
       let fins = "";
       for (let i = 0; i < 8; i++) fins += `<line x1="${60 + i * 10}" x2="${60 + i * 10}" y1="20" y2="50" stroke="#0f172a" stroke-width="2" opacity=".35"/>`;
       emitter = `<rect x="52" y="16" width="88" height="38" rx="4" fill="url(#chk)" opacity=".9"/>${fins}`;
@@ -906,6 +934,68 @@ class LambdaCockpitCard extends HTMLElement {
         ${this._numCtl(`☀️ ${L("pv_increase")}`, "pv_offset", "K", 0.5)}
         <div class="cfoot">${L("floor")}${numbered || circuit > 1 ? ` ${circuit}` : ""}${this._help("heizkreis")}</div>
       </div>`;
+  }
+
+  // The cockpit settings the integration keeps in Home Assistant's storage.
+  async _loadSettings() {
+    this._settingsLoading = true;
+    try {
+      this._settings = await this._hass.callWS({ type: "lambda_heat_pumps/cockpit_settings" });
+    } catch (err) {
+      console.error(err);
+      this._settings = {};
+    }
+    this._settingsLoading = false;
+    this._render();
+  }
+
+  async _setSetting(key, value) {
+    try {
+      this._settings = await this._hass.callWS({ type: "lambda_heat_pumps/cockpit_settings/set", key, value });
+    } catch (err) {
+      console.error(err);
+    }
+    this._render();
+  }
+
+  // Radiator or floor heating of the circuit this tile shows: the setting wins over the card's YAML.
+  _heatingType() {
+    const n = parseInt(this._config.circuit, 10) || 1;
+    const set = this._settings && this._settings["heating_type_" + n];
+    return set || this._config.heating_type || "floor";
+  }
+
+  _renderSettingsPopup() {
+    const s = this._settings || {};
+    const cur = s.buffer_setpoint_sensor || "";
+    const opt = (v, label, sel) => `<option value="${lccEsc(v)}" ${sel ? "selected" : ""}>${lccEsc(label)}</option>`;
+    const sensors = Object.keys(this._hass.states).filter((id) => id.startsWith("sensor.")).sort();
+    const sensorOpts = [opt("", L("buf_auto"), !cur)]
+      .concat(sensors.map((id) => opt(id, `${(this._hass.states[id].attributes || {}).friendly_name || id} (${id})`, id === cur)))
+      .join("");
+    const circuits = [parseInt(this._config.circuit, 10) || 1]
+      .concat(this._extraCircuits().map((c) => c.circuit))
+      .filter((n, i, all) => all.indexOf(n) === i);
+    const typeSel = (n) => {
+      const v = s["heating_type_" + n] || this._config.heating_type || "floor";
+      return `<select data-setting="heating_type_${n}">${opt("floor", L("type_floor"), v === "floor")}${opt("radiator", L("type_radiator"), v === "radiator")}</select>`;
+    };
+    return `
+    <div class="modal" data-act="close-popup">
+      <div class="mbox" data-act="noop">
+        <div class="mhead"><b>⚙️ ${L("settings_title")}</b><span class="mx" data-act="close-popup">✕</span></div>
+        <div class="panel">
+          <div class="ph">🧱 ${L("buf_sensor_title")}</div>
+          <select data-setting="buffer_setpoint_sensor">${sensorOpts}</select>
+          <label class="chk"><input type="checkbox" data-setting="buffer_fallback" ${s.buffer_fallback ? "checked" : ""}> ${L("buf_fallback_label")}</label>
+          <div class="hint">${L("buf_fallback_info")}</div>
+        </div>
+        <div class="panel">
+          <div class="ph">🔥 ${L("circuit_type_title")}</div>
+          ${circuits.map((n) => `<div class="srow"><span>${L("circuit")} ${n}</span>${typeSel(n)}</div>`).join("")}
+        </div>
+      </div>
+    </div>`;
   }
 
   _renderPopup() {
@@ -1090,6 +1180,7 @@ class LambdaCockpitCard extends HTMLElement {
       <div class="ph"><b>🎛️ ${L("actions")}${this._help("aktionen")}</b></div>
       <div class="actions">
         <button class="act ghost" data-act="popup"><span>🤖</span>${L("functions_btn")}<em>${fnOn} ${L("active")}</em></button>
+        <button class="act ghost" data-act="settings-popup"><span>⚙️</span>${L("settings_btn")}</button>
       </div>
     </div>`;
   }
@@ -1273,7 +1364,7 @@ class LambdaCockpitCard extends HTMLElement {
     // Buffer
     const hcSoll = this._n("hc_soll");
     const bPv = pvOn ? this._n("buf_pv_offset") || 0 : 0;
-    const bSoll = this._bufSoll();
+    const bSoll = this._bufSoll(hcSoll, bPv);
     const h25 = this._n("p_buf_ein25");
     const h50 = this._n("p_buf_ein50");
     const bH = h25 + ((h50 - h25) * (lccClamp(bSoll, 25, 50) - 25)) / 25;
@@ -1371,7 +1462,7 @@ class LambdaCockpitCard extends HTMLElement {
           </div>
           <div class="foot">${L("foot", LCC_VERSION)}</div>
         </div>
-        ${this._popup ? this._renderPopup() : ""}
+        ${this._popup === "settings" ? this._renderSettingsPopup() : this._popup ? this._renderPopup() : ""}
       </ha-card>`;
     } catch (e) {
       html = `<ha-card><div style="padding:16px;color:#f87171">${L("error")}: ${lccEsc(e.message)}</div></ha-card>`;
@@ -1386,6 +1477,10 @@ class LambdaCockpitCard extends HTMLElement {
 }
 
 const LCC_CSS = `
+.srow{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:6px 0;font-size:13px}
+.srow select,.panel select{background:#0d1629;color:var(--txt);border:1px solid #27406b;border-radius:8px;padding:6px;max-width:70%}
+.hint{font-size:12px;color:var(--mut);margin-top:4px}
+.chk{display:flex;gap:8px;align-items:center;margin-top:8px;font-size:13px}
 :host{--bg1:#0b1324;--bg2:#0f1b33;--card:#111c31;--card2:#0d1629;--line:#1f2d47;--txt:#e2e8f0;--mut:#8aa0bf;--acc:#5eead4;}
 ha-card{background:radial-gradient(1200px 500px at 0% 0%,#13284a 0%,transparent 60%),linear-gradient(180deg,var(--bg1),var(--bg2));color:var(--txt);border-radius:22px;border:1px solid var(--line);overflow:hidden;font-family:inherit}
 .wrap{padding:16px;display:flex;flex-direction:column;gap:14px}
