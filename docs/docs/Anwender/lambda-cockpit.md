@@ -30,6 +30,12 @@ Die Texte erscheinen auf Deutsch oder Englisch, je nach Sprache Ihres Benutzerpr
 
 Das Dashboard können Sie wie jedes andere bearbeiten. Ändert eine neue Version der Integration den Aufbau, wird es einmal neu geschrieben; eigene Änderungen gehen dann verloren. Wer viel anpasst, kopiert sich die Karten besser in ein eigenes Dashboard.
 
+### Nach einer Änderung in den Optionen
+
+Ändern Sie etwas in den Optionen der Integration (z. B. ein Modul, einen Puffer oder einen Heizkreis), erkennt das Cockpit die neuen Module nicht von allein. **Schalten Sie in den Optionen „Lambda Cockpit“ einmal aus und wieder ein.** Danach sind die neuen Kacheln da, z. B. der Puffer. Eigene Änderungen am Dashboard gehen dabei verloren, wie beim Neuschreiben.
+
+Der Browser lädt die Seite nach dem Umschalten neu. Fehlt danach etwas, die Seite mit Strg+F5 neu laden.
+
 ### Nach einem Update der Integration
 
 - **Die Karten sind sofort aktuell.** Der Browser lädt nach dem Update die neue Fassung von Cockpit-, Heizkreis- und Entitäten-Karte, auch in einem eigenen Dashboard. Neue Anzeigen innerhalb der Karten sind damit ohne Zutun da. Fehlen sie, die Seite im Browser neu laden.
