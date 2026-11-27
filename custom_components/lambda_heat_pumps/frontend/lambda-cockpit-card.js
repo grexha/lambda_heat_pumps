@@ -969,12 +969,9 @@ class LambdaCockpitCard extends HTMLElement {
     const s = this._settings || {};
     const cur = s.buffer_setpoint_sensor || "";
     const opt = (v, label, sel) => `<option value="${lccEsc(v)}" ${sel ? "selected" : ""}>${lccEsc(label)}</option>`;
-    // Only this integration's temperature sensors: the controller's own and the ones
-    // it made for its modules, so nothing from other integrations is offered.
-    const sensors = Object.values(this._hass.entities || {})
-      .filter((e) => e.platform === "lambda_heat_pumps" && e.entity_id.startsWith("sensor."))
-      .map((e) => e.entity_id)
-      .filter((id) => this._hass.states[id] && (this._hass.states[id].attributes || {}).device_class === "temperature")
+    // Every temperature sensor Home Assistant knows, whatever integration it comes from.
+    const sensors = Object.keys(this._hass.states)
+      .filter((id) => id.startsWith("sensor.") && (this._hass.states[id].attributes || {}).device_class === "temperature")
       .sort();
     const sensorOpts = [opt("", L("buf_auto"), !cur)]
       .concat(sensors.map((id) => opt(id, `${(this._hass.states[id].attributes || {}).friendly_name || id} (${id})`, id === cur)))
