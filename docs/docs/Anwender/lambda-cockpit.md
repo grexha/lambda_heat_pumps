@@ -91,6 +91,23 @@ Jeder Teil des Cockpits ist auf einer eigenen Seite erklärt: [Lambda Cockpit: d
 
 PV-Leistung, Hausbatterie, Stromquelle der Wärmepumpe und Netzentgelt-Fenster gehören nicht zur Integration. Wer sie sehen möchte, trägt sie im Karten-Editor ein (Dashboard bearbeiten → Karte → Code-Editor):
 
+!!! warning "Eigene Änderungen an der YAML gehen beim Neuschreiben verloren"
+    Das Dashboard „Lambda Cockpit“ schreibt die Integration in diesen Fällen komplett neu:
+
+    - nach einem Update, das den Aufbau des Dashboards ändert (einmalig beim Start),
+    - wenn Sie in den Optionen „Lambda Cockpit“ aus- und wieder einschalten,
+    - mit der Aktion `lambda_heat_pumps.generate_dashboard`,
+    - wenn Sie eine Reparaturmeldung zum Cockpit absenden (z. B. für weitere Heizkreise).
+
+    Dabei setzt sie alle Einträge auf den Standard zurück. Eigene Angaben in `entities:`, etwa ein anderer Sensor oder die PV- und Batterie-Sensoren aus diesem Abschnitt, sind danach weg.
+
+    Erhalten bleiben:
+
+    - was Sie im Tab [Einstellungen](lambda-cockpit-einstellungen.md) gewählt haben (Puffer-Sensor, Ausweichrechnung, Heizkörper je Heizkreis); diese Werte liegen in Home Assistant, nicht im Dashboard,
+    - Cockpit-Karten in einem [eigenen Dashboard](#die-karten-in-einem-eigenen-dashboard); dieses fasst die Integration nie an.
+
+    Wer Sensoren dauerhaft anders zuordnen will, nutzt den Tab Einstellungen, soweit er die Auswahl anbietet, oder kopiert die Karte in ein eigenes Dashboard.
+
 ```yaml
 type: custom:lambda-cockpit-card
 entities:
