@@ -56,6 +56,7 @@ Ist ein Minimum nicht kleiner als das Maximum, lehnt der Dialog das Speichern ab
 - **Vorauswahl:** die Reihenfolge der eingestellten Firmware (`high_first` bis V0.0.9-3K, `low_first` ab V0.0.10-3K).
 - **Ändern** nur, wenn die akkumulierten Energiezähler trotz richtiger Firmware-Version unsinnige Werte zeigen, siehe [Falsche / keine Sensorwerte](../FAQ/falsche-keine-sensorwerte.md).
 - Bei einem Firmwarewechsel über „Neu konfigurieren“ wird eine hier gewählte Reihenfolge zurückgesetzt; danach gilt die der neuen Firmware.
+- War die Reihenfolge eine Zeit lang falsch, enthalten die Energiezähler überhöhte Werte. Wie Sie sie bereinigen: [Energiezähler nach falscher Registerreihenfolge korrigieren](zaehler-korrigieren-registerreihenfolge.md).
 
 ### Perioden-Energiesensoren aktivieren
 

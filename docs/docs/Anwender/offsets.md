@@ -279,3 +279,4 @@ Prüfen Sie, ob die Sensor-Werte korrekt sind:
 - [lambda_wp_config.yaml Konfiguration](lambda-wp-config.md) – vollständige Konfigurationsdatei
 - [Energieverbrauchsberechnung](Energieverbrauchsberechnung.md) – Quellsensoren für Energiedaten
 - [Historische Daten löschen](historische_daten_loeschen.md) – Zähler und Verlauf zurücksetzen
+- [Energiezähler nach falscher Registerreihenfolge korrigieren](zaehler-korrigieren-registerreihenfolge.md) – überhöhte Zähler per Offset bereinigen

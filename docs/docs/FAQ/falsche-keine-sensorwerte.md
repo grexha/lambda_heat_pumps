@@ -38,6 +38,8 @@ Seit Version 3.5 verwendet die Integration automatisch die Reihenfolge der **ein
 
 Ab Version 3.6 gelangen falsch gelesene Zähler nicht mehr in die Statistik (siehe oben). Wurden sie mit einer älteren Version schon aufgezeichnet, zeigt das Energie-Dashboard einen riesigen Sprung, auch in Auswertungen auf den Zählern (z. B. Verbrauchszähler-Helfer). Die Gesamtzähler der Integration (`*_energy_total`, COP) schützt ein Sprungfilter, der Sprünge über 100 kWh pro Abfrage verwirft. Die akkumulierten Zähler selbst sind aber betroffen.
 
+**Energiezähler der Integration trotzdem überhöht?** Mit vertauschten Registern steigt der gelesene Wert in Stufen von rund 65,5 kWh. Diese Stufen liegen unter dem Sprungfilter und werden mitgezählt. Wie Sie solche Zähler erkennen und per Offset bereinigen: [Energiezähler nach falscher Registerreihenfolge korrigieren](../Anwender/zaehler-korrigieren-registerreihenfolge.md).
+
 **So bereinigen Sie die Statistik, ohne die Historie zu verlieren:**
 
 1. Erst die Register-Reihenfolge korrigieren (siehe oben) und prüfen, dass die Zähler wieder mit dem Display übereinstimmen.

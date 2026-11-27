@@ -70,6 +70,7 @@ nav = [
     { "Firmware-Version ändern" = "Anwender/firmware-wechsel.md" },
     { "Historische Daten übernehmen" = "Anwender/historische-daten.md" },
     { "Offsets (Historische Daten)" = "Anwender/offsets.md" },
+    { "Zähler nach falscher Registerreihenfolge korrigieren" = "Anwender/zaehler-korrigieren-registerreihenfolge.md" },
     { "Historische Daten löschen" = "Anwender/historische_daten_loeschen.md" },
     { "lambda_wp_config.yaml Konfiguration" = "Anwender/lambda-wp-config.md" },
     { "Aktionen (read / write Modbus register)" = "Anwender/aktionen-modbus.md" },
