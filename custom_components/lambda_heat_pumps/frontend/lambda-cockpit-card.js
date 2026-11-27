@@ -1043,7 +1043,7 @@ class LambdaCockpitCard extends HTMLElement {
     return `
     <div class="modal" data-act="close-popup">
       <div class="mbox" data-act="noop">
-        <div class="mhead"><b>🤖 ${L("popup_title")}</b><span class="mx" data-act="close-popup">✕</span></div>
+        <div class="mhead"><b>🤖 ${L("popup_title")}</b>${this._help("aktionen")}<span class="mx" data-act="close-popup">✕</span></div>
         <div class="panel">
           <div class="ph">🧮 ${L("counters")}</div>
           <div class="counters c3">
@@ -1198,7 +1198,7 @@ class LambdaCockpitCard extends HTMLElement {
     </div>
 
     <div class="panel">
-      <div class="ph"><b>🎛️ ${L("actions")}${this._help("aktionen")}</b></div>
+      <div class="ph"><b>🎛️ ${L("actions")}</b></div>
       <div class="actions">
         <button class="act ghost" data-act="popup"><span>🤖</span>${L("functions_btn")}<em>${fnOn} ${L("active")}</em></button>
         <button class="act ghost" data-act="settings-popup"><span>⚙️</span>${L("settings_btn")}</button>
