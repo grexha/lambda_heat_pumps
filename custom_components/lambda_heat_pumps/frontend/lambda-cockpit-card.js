@@ -153,6 +153,7 @@ function L(key, ...args) {
 }
 // The help page: one section per part of the card.
 const LCC_HELP_URL = "https://grexha.github.io/lambda_heat_pumps/Anwender/lambda-cockpit-kacheln/";
+const LCC_CONFIG_URL = "https://grexha.github.io/lambda_heat_pumps/Anwender/lambda-cockpit-einstellungen/";
 
 // Units the card calculates in. A user may switch a sensor's display unit (e.g.
 // W to kW); its state then comes in that unit and is converted back here.
@@ -618,6 +619,15 @@ class LambdaCockpitCard extends HTMLElement {
   // The buffer's setpoint: the sensor chosen in the settings, else the controller's own
   // value. The calculated fallback is only used when the settings switch it on, and only
   // if the result lies in the buffer's range (0 to 90 °C).
+  // The highest flow setpoint of all heating circuits (the buffer follows the warmest one).
+  _hcSollMax() {
+    const vals = [this._n("hc_soll")].concat(
+      this._extraCircuits().map((c) => this._withCircuit(c, () => this._n("hc_soll")))
+    );
+    const ok = vals.filter((v) => !Number.isNaN(v));
+    return ok.length ? Math.max(...ok) : NaN;
+  }
+
   _bufSoll(hcSoll, pv) {
     const s = this._settings || {};
     if (s.buffer_setpoint_sensor && this._hass.states[s.buffer_setpoint_sensor]) {
@@ -863,7 +873,7 @@ class LambdaCockpitCard extends HTMLElement {
       </div>`;
     const buf = !showBuf ? "" : `
       <div class="ctrl" data-ent="${lccEsc(this._id("buf_top"))}">
-        <div class="cbar"><span class="cval">◀ ${lccFmt(this._bufSoll(hcSoll, 0), 1)}°</span>${st(bState, bRun)}</div>
+        <div class="cbar"><span class="cval">◀ ${lccFmt(this._bufSoll(this._hcSollMax(), 0), 1)}°</span>${st(bState, bRun)}</div>
         <div class="cimg"><svg viewBox="0 0 200 150">
           <defs><linearGradient id="cbf" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6b7280"/><stop offset=".45" stop-color="#d1d5db"/><stop offset="1" stop-color="#4b5563"/></linearGradient></defs>
           <rect x="84" y="14" width="86" height="122" rx="10" fill="url(#cbf)" stroke="#e5e7eb" stroke-width="1"/>
@@ -986,7 +996,7 @@ class LambdaCockpitCard extends HTMLElement {
     return `
     <div class="modal" data-act="close-popup">
       <div class="mbox" data-act="noop">
-        <div class="mhead"><b>⚙️ ${L("settings_title")}</b><span class="mx" data-act="close-popup">✕</span></div>
+        <div class="mhead"><b>⚙️ ${L("settings_title")}</b><a class="help" href="${LCC_CONFIG_URL}" target="_blank" rel="noopener" title="${lccEsc(L("help"))}" aria-label="${lccEsc(L("help"))}">?</a><span class="mx" data-act="close-popup">✕</span></div>
         <div class="panel">
           <div class="ph">🧱 ${L("buf_sensor_title")}</div>
           <select data-setting="buffer_setpoint_sensor">${sensorOpts}</select>
@@ -1367,7 +1377,7 @@ class LambdaCockpitCard extends HTMLElement {
     // Buffer
     const hcSoll = this._n("hc_soll");
     const bPv = pvOn ? this._n("buf_pv_offset") || 0 : 0;
-    const bSoll = this._bufSoll(hcSoll, bPv);
+    const bSoll = this._bufSoll(this._hcSollMax(), bPv);
     const h25 = this._n("p_buf_ein25");
     const h50 = this._n("p_buf_ein50");
     const bH = h25 + ((h50 - h25) * (lccClamp(bSoll, 25, 50) - 25)) / 25;

@@ -4,7 +4,7 @@ title: "Lambda Cockpit: die Kacheln"
 
 # Lambda Cockpit: die Kacheln
 
-*Zuletzt geändert am 15.11.2026*
+*Zuletzt geändert am 27.11.2026*
 
 Diese Seite erklärt jeden Teil des [Lambda Cockpits](lambda-cockpit.md). Das Symbol **?** oben an einer Kachel führt direkt zum passenden Abschnitt. Die kleinen **i** in den Kacheln klappen dagegen eine Kurzinfo direkt im Cockpit auf.
 
@@ -49,7 +49,7 @@ Läuft die Zirkulationspumpe oder lief sie vor kurzem, steht daneben „Zirku l�
 
 ## Puffer
 
-Der Pufferspeicher mit den Temperaturen oben und unten. Oben links steht das Puffer-Soll: Soll-Vorlauf des Heizkreises plus **Solltemperaturoffset Heizbetrieb**. Der Offset ist eine Kopie vom Display (siehe Hinweis oben).
+Der Pufferspeicher mit den Temperaturen oben und unten. Oben links steht das Puffer-Soll. Es kommt in dieser Reihenfolge: der Sensor, den Sie unter [Einstellungen](lambda-cockpit-einstellungen.md#puffer-sollwert) gewählt haben, sonst der Puffer-Sollwert, den die Lambda meldet (Register 3004). Nur wenn beides fehlt und die [Ausweichrechnung](lambda-cockpit-einstellungen.md#ausweichrechnung) eingeschaltet ist, rechnet das Cockpit aus dem höchsten Heizkreis-Sollwert plus dem **Solltemperaturoffset Heizbetrieb** (eine Kopie vom Display, siehe Hinweis oben). Ohne Wert zeigt die Kachel „–“.
 
 ## Heizkreis
 
