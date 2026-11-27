@@ -355,7 +355,15 @@ class LambdaCockpitCard extends HTMLElement {
     if (!this._resolved && !Object.keys(this._config.entities).some((k) => k !== "sun")) {
       this._autoResolve();
     }
-    if (!this._late && hass.entities) this._resolveLate();
+    // Entities that appear after the dashboard was written (a buffer, a second circuit)
+    // are looked up again whenever the entity registry changes.
+    if (hass.entities) {
+      const count = Object.keys(hass.entities).length;
+      if (count !== this._entCount) {
+        this._entCount = count;
+        this._resolveLate();
+      }
+    }
     const ids = Object.values(this._config.entities).concat(
       ...this._extraCircuits().map((c) => Object.values(c.entities))
     );
@@ -382,7 +390,7 @@ class LambdaCockpitCard extends HTMLElement {
   // A dashboard from an older version lacks the slots added since; find them.
   _resolveLate() {
     this._late = true;
-    const missing = LCC_LATE_KEYS.filter((k) => !(k in this._config.entities));
+    const missing = LCC_SLOTS.filter((k) => !(k in this._config.entities));
     if (!missing.length) return;
     const map = this._resolveMap(parseInt(this._config.circuit, 10) || 1);
     for (const k of missing) if (map[k]) this._config.entities[k] = map[k];
