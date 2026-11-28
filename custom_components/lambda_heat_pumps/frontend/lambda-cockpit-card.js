@@ -422,7 +422,8 @@ class LambdaCockpitCard extends HTMLElement {
   }
 
   // Further heating circuits the cockpit shows a tile for (`heating_circuits`
-  // in the config): each with its own entities, or found by its number alone.
+  // in the config): each with its own entities, or found by its number alone,
+  // and optionally its own `heating_type`.
   _extraCircuits() {
     const list = this._config.heating_circuits;
     if (!Array.isArray(list) || !list.length || !this._hass) return [];
@@ -436,7 +437,8 @@ class LambdaCockpitCard extends HTMLElement {
             entities = {};
             for (const k of LCC_HC_KEYS) if (map[k]) entities[k] = map[k];
           }
-          return { circuit, entities: entities || {} };
+          const heatingType = typeof c === "object" && c ? c.heating_type : undefined;
+          return { circuit, entities: entities || {}, heating_type: heatingType };
         })
         .filter((c) => c.circuit > 0);
     }
@@ -447,15 +449,19 @@ class LambdaCockpitCard extends HTMLElement {
   _withCircuit(c, fn) {
     const entities = this._config.entities;
     const circuit = this._config.circuit;
+    const heatingType = this._config.heating_type;
     const base = {};
     for (const [k, v] of Object.entries(entities)) if (!LCC_HC_KEYS.includes(k)) base[k] = v;
     this._config.entities = { ...base, ...c.entities };
     this._config.circuit = c.circuit;
+    // A circuit's own `heating_type` wins; without one it keeps the cockpit's.
+    if (c.heating_type) this._config.heating_type = c.heating_type;
     try {
       return fn();
     } finally {
       this._config.entities = entities;
       this._config.circuit = circuit;
+      this._config.heating_type = heatingType;
     }
   }
 
@@ -861,7 +867,8 @@ class LambdaCockpitCard extends HTMLElement {
   }
 
   // The heating circuit's tile. The cockpit and the heating circuit card share
-  // it; `heating_type: radiator` draws radiators instead of floor heating.
+  // it; `heating_type: radiator` draws radiators instead of floor heating. In
+  // the cockpit an entry of `heating_circuits` can set its own.
   _hcTile(numbered = false) {
     if (!this._has("hc_vl") && !this._has("hc_state")) return "";
     const hcVl = this._n("hc_vl");

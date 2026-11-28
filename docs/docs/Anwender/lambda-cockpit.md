@@ -145,7 +145,18 @@ entities:
 
 Die Einstellwerte des Heizkreises (Hysteresen, Spreizung, Heizgrenze, max. Vorlauf) einmal am Gerät des Heizkreises unter **Konfiguration** vom Lambda-Display übernehmen; sonst stimmt der Schaltpunkt nicht.
 
-`heating_type: radiator` gibt es auch für die Cockpit-Karte, wenn Heizkreis 1 Heizkörper versorgt.
+`heating_type: radiator` gibt es auch für die Cockpit-Karte. Dort gilt es für Heizkreis 1 und für alle weiteren Heizkreise, die keinen eigenen Wert haben. Versorgen die Heizkreise unterschiedliche Heizflächen, tragen Sie den Wert beim jeweiligen Eintrag unter `heating_circuits` ein:
+
+```yaml
+type: custom:lambda-cockpit-card
+# kein heating_type: Heizkreis 1 ist eine Fußbodenheizung
+heating_circuits:
+  - circuit: 2
+    heating_type: radiator  # Heizkreis 2 hat Heizkörper
+    entities: …             # bleibt, wie die Integration es geschrieben hat
+```
+
+Das gilt nur für die Kacheln auf der Hauptseite; die Reiter der Heizkreise haben ihre eigene Karte mit eigenem `heating_type`. Wird das Cockpit neu geschrieben (Reparaturmeldung, Option aus und ein, `generate_dashboard`), ist der Eintrag weg und muss neu gesetzt werden.
 
 ## Die Karten in einem eigenen Dashboard
 
